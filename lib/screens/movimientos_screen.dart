@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'Categorias');
               },
             ),
           ],

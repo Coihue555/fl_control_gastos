@@ -23,7 +23,7 @@ class DBProvider {
 
   Future<dynamic> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'conga11DB.db');
+    final path = join(documentsDirectory.path, 'conga12DB.db');
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
@@ -42,8 +42,7 @@ class DBProvider {
           '''
           CREATE TABLE cuentas(
             id INTEGER PRIMARY KEY,
-            cuenta TEXT,
-            usuario TEXT
+            nombreCuenta TEXT
           )
           '''
         );
@@ -52,8 +51,8 @@ class DBProvider {
         
           CREATE TABLE categorias(
             id INTEGER PRIMARY KEY,
-            categoria TEXT,
-            tipo TEXT
+            nombreCategoria TEXT,
+            tipoCategoria TEXT
           )
         ''');
     });

@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => MovimientosBloc()),
         BlocProvider(create: (_) => CuentasBloc()),
+        BlocProvider(create: (_) => CategoriasBloc()),
       ],
       child: Builder(builder: (context) {
         context.read<MovimientosBloc>().add(GetMovimientosList());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
               'MovimientosFicha': (_) => MovimientosFichaScreen(),
               'CuentasFicha'    : (_) => CuentaFichaScreen(),
               'Cuentas'         : (_) => const CuentasScreen(),
+              'Categorias'      : (_) => const CategoriasScreen(),
             });
       }),
     );
