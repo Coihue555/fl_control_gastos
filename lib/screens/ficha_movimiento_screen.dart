@@ -1,20 +1,19 @@
 // ignore_for_file: avoid_print
-import 'package:fl_control_gastos/widgets/custom_Dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
 
-class FichaScreen extends StatefulWidget {
+class FichaMovimientoScreen extends StatefulWidget {
   @override
-  State<FichaScreen> createState() => _FichaScreenState();
+  State<FichaMovimientoScreen> createState() => _FichaMovimientoScreenState();
 }
 
-class _FichaScreenState extends State<FichaScreen> {
+class _FichaMovimientoScreenState extends State<FichaMovimientoScreen> {
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
-    String dropdownValue = 'Efectivo';
+    String spCuenta = 'Efectivo';
     String spDescripcion = '';
     double spValor = 0.0;
 
@@ -48,35 +47,16 @@ class _FichaScreenState extends State<FichaScreen> {
                                       },
                                     ),
 
-
-                                    DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down),
-      underline: Container(
-        height: 2,
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
-      },
-      items: <String>['Santander', 'Efectivo', 'Macro', 'MPago']
-          .map<DropdownMenuItem<String>>((String value) {
-            
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-          
-        );
-      }).toList(),
-
-    ),
-
-
-
-
-
-                                    
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Cuenta',
+                                      ),
+                                      initialValue: state.movimiento.cuenta,
+                                      onChanged:( value ) {spCuenta = value; },
+                                    ),
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -86,6 +66,9 @@ class _FichaScreenState extends State<FichaScreen> {
                                       ),
                                       initialValue: state.movimiento.descripcion,
                                       onChanged:( value ) {spDescripcion = value; },
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
                                     TextFormField(
                                       decoration: const InputDecoration(
@@ -110,7 +93,7 @@ class _FichaScreenState extends State<FichaScreen> {
                                           
                                           context
                                               .read<MovimientosBloc>()
-                                              .add(ValidateMovimiento(spCategoria, dropdownValue, spDescripcion, spValor));
+                                              .add(ValidateMovimiento(spCategoria, spCuenta, spDescripcion, spValor));
                                         }),
                                   ],
                                 ),

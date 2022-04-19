@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_control_gastos/screens/ficha_screen.dart';
-import 'package:fl_control_gastos/screens/home_screen.dart';
-import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
+import 'package:fl_control_gastos/screens/screens.dart';
+import 'package:fl_control_gastos/bloc/blocs.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => MovimientosBloc())],
+      providers: [
+        BlocProvider(create: (_) => MovimientosBloc()),
+        BlocProvider(create: (_) => CuentasBloc()),
+      ],
       child: Builder(builder: (context) {
         context.read<MovimientosBloc>().add(GetMovimientosList());
         return MaterialApp(
@@ -19,7 +21,9 @@ class MyApp extends StatelessWidget {
             initialRoute: 'Home',
             routes: {
               'Home': (_) => const HomeScreen(),
-              'Ficha': (_) => FichaScreen(),
+              'MovimientosFicha': (_) => FichaMovimientoScreen(),
+              'CuentasFicha': (_) => CuentaFichaScreen(),
+              'Cuentas': (_) => const CuentasScreen(),
             });
       }),
     );

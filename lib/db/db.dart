@@ -4,8 +4,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:fl_control_gastos/models/movimientos_model.dart';
-export 'package:fl_control_gastos/models/movimientos_model.dart';
+import 'package:fl_control_gastos/models/models.dart';
+export 'package:fl_control_gastos/models/models.dart';
 
 class DBProvider {
   static Database? _database;
@@ -23,7 +23,7 @@ class DBProvider {
 
   Future<dynamic> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'conga10DB.db');
+    final path = join(documentsDirectory.path, 'conga11DB.db');
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
@@ -31,6 +31,7 @@ class DBProvider {
           CREATE TABLE transacciones(
             id INTEGER PRIMARY KEY,
             categoria TEXT,
+            cuenta TEXT,
             descripcion TEXT,
             valor REAL
           )
@@ -57,6 +58,9 @@ class DBProvider {
         ''');
     });
   }
+
+
+//Transacciones
 
   Future<int> nuevoDato(MovimientosModel nuevoDato) async {
     final id = nuevoDato.id;
@@ -127,5 +131,81 @@ class DBProvider {
     final res = await db!.delete('transacciones');
     return res;
   }
-  
+
+
+  // Cuentas
+  Future<int> nuevaCuenta(CuentaModel nuevaCuenta) async {
+    final db = await database;
+    final res = await db!.insert('cuentas', nuevaCuenta.toJson());
+    //id del ultimo registro
+    return res;
+  }
+
+  Future<List<CuentaModel>> getCuentas() async {
+    final db = await database;
+    final res = await db!.query('cuentas', orderBy: 'id DESC');
+
+    return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
+  }
+
+  Future<CuentaModel> getCuentaById(int id) async {
+    final db = await database;
+    final res = await db!.query('cuentas', where: 'id = ?', whereArgs: [id]);
+
+    return res.isNotEmpty ? CuentaModel.fromJson(res.first) : CuentaModel(nombreCuenta: '', tipoCuenta: '');
+  }
+
+  Future<int> deleteCuenta(int id) async {
+    final db = await database;
+    final res = await db!.delete('cuentas', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  Future<int> updateCuenta(CuentaModel nuevaCuenta) async {
+    final db = await database;
+    final res = await db!.update('cuentas', nuevaCuenta.toJson(),
+        where: 'id = ?', whereArgs: [nuevaCuenta.id]);
+
+    return res;
+  }
+
+
+    // Categorias
+  Future<int> nuevaCategoria(CategoriaModel nuevaCategoria) async {
+    final db = await database;
+    final res = await db!.insert('categorias', nuevaCategoria.toJson());
+    //id del ultimo registro
+    return res;
+  }
+
+  Future<List<CategoriaModel>> getCategorias() async {
+    final db = await database;
+    final res = await db!.query('categorias', orderBy: 'id DESC');
+
+    return res.isNotEmpty ? res.map((s) => CategoriaModel.fromJson(s)).toList() : [];
+  }
+
+  Future<CategoriaModel> getCategoriaById(int id) async {
+    final db = await database;
+    final res = await db!.query('categoria', where: 'id = ?', whereArgs: [id]);
+
+    return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', tipoCategoria: '');
+  }
+
+  Future<int> deleteCategoria(int id) async {
+    final db = await database;
+    final res = await db!.delete('categoria', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  Future<int> updateCategoria(CategoriaModel nuevaCategoria) async {
+    final db = await database;
+    final res = await db!.update('cuentas', nuevaCategoria.toJson(),
+        where: 'id = ?', whereArgs: [nuevaCategoria.id]);
+
+    return res;
+  }
+
+
+
 }

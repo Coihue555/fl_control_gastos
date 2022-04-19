@@ -22,7 +22,7 @@ class MovimientosModel {
       MovimientosModel(
           id: id ?? this.id,
           categoria: categoria,
-          cuenta: cuenta ?? this.cuenta,
+          cuenta: cuenta,
           descripcion: descripcion ?? this.descripcion,
           valor: valor ?? this.valor);
 

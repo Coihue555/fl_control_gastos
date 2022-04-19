@@ -8,6 +8,32 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Control de Gastos', style: TextStyle(fontSize: 30, color: Colors.white)),
+            ),
+            ListTile(
+              title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
+              onTap: () {
+                Navigator.pushNamed(context, 'Cuentas');
+              },
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Text('Movimientos'),
       ),
@@ -15,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         listenWhen: (previous, current) => !current.isWorking,
         listener: (context, state) {
           if (state.accion == 'NewMovimiento' || state.accion == 'UpdateMovimiento') {
-            Navigator.pushNamed(context, 'Ficha');
+            Navigator.pushNamed(context, 'MovimientosFicha');
           }
           if (state.error.isNotEmpty) {
             print(state.error);
