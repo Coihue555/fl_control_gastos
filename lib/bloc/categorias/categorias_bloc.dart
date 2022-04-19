@@ -76,9 +76,10 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
       if (event.nombreCategoria.length < 3) {
         error = 'El nombre debe ser mas largo';
       } else {
-        categoria.tipoCategoria = event.tipoCategoria;
+        categoria.nombreCategoria = event.nombreCategoria;
       }
     }
+    categoria.tipoCategoria = event.tipoCategoria;
 
     emit(state.copyWith(
       isWorking: false,

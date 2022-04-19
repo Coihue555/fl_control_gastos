@@ -45,7 +45,7 @@ class CuentasBloc extends Bloc<CuentasEvent, CuentasState> {
     final List<CuentaModel> lst = await DBProvider.db.getCuentas();
     emit(state.copyWith(
       lista: lst,
-      accion: 'GetCategoriaList',
+      accion: 'GetCuentasList',
       error: '',
       isWorking: false,
     ));
@@ -77,6 +77,7 @@ class CuentasBloc extends Bloc<CuentasEvent, CuentasState> {
         error = 'El nombre debe ser mas largo';
       } 
     }
+    cuenta.nombreCuenta = event.nombreCuenta;
 
     emit(state.copyWith(
       isWorking: false,
@@ -88,7 +89,7 @@ class CuentasBloc extends Bloc<CuentasEvent, CuentasState> {
 
   Future<void> _deleteCuenta(DeleteCuenta event, Emitter emit) async {
     emit(state.copyWith(isWorking: true, accion: 'DeleteCuenta', error: ''));
-    await DBProvider.db.deleteDato(event.id);
+    await DBProvider.db.deleteCuenta(event.id);
 
     // final List<MovimientosModel> lst = await DBProvider.db.getTodos();
 

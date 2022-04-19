@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         context.read<MovimientosBloc>().add(GetMovimientosList());
+        context.read<CuentasBloc>().add(GetCuentasList());
+        context.read<CategoriasBloc>().add(GetCategoriaList());
+
         return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Movimientos',
@@ -23,9 +26,10 @@ class MyApp extends StatelessWidget {
             routes: {
               'Home'            : (_) => const HomeScreen(),
               'MovimientosFicha': (_) => MovimientosFichaScreen(),
-              'CuentasFicha'    : (_) => CuentaFichaScreen(),
               'Cuentas'         : (_) => const CuentasScreen(),
+              'CuentasFicha'    : (_) => CuentaFichaScreen(),
               'Categorias'      : (_) => const CategoriasScreen(),
+              'CategoriasFicha' : (_) => CategoriasFichaScreen(),
             });
       }),
     );

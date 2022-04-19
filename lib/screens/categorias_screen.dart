@@ -1,3 +1,4 @@
+import 'package:fl_control_gastos/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -8,32 +9,7 @@ class CategoriasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Categorias', style: TextStyle(fontSize: 30, color: Colors.white)),
-            ),
-            ListTile(
-              title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
-              onTap: () {
-                Navigator.pushNamed(context, 'CuentasFicha');
-              },
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         title: const Text('Categorias'),
       ),
@@ -41,7 +17,7 @@ class CategoriasScreen extends StatelessWidget {
         listenWhen: (previous, current) => !current.isWorking,
         listener: (context, state) {
           if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-            Navigator.pushNamed(context, 'CategoriaFicha');
+            Navigator.pushNamed(context, 'CategoriasFicha');
           }
           if (state.error.isNotEmpty) {
             print(state.error);
@@ -71,7 +47,7 @@ class CategoriasScreen extends StatelessWidget {
                                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                     child: ListTile(
-                              leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
+                              leading: const Icon(Icons.calculate, color: Colors.blue),
                               title: Text(state.lista[i].nombreCategoria),
                               subtitle: Text(state.lista[i].tipoCategoria,),
                               trailing: Container(

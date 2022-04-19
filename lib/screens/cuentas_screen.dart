@@ -1,3 +1,4 @@
+import 'package:fl_control_gastos/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -8,32 +9,7 @@ class CuentasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Control de Gastos', style: TextStyle(fontSize: 30, color: Colors.white)),
-            ),
-            ListTile(
-              title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
-              onTap: () {
-                Navigator.pushNamed(context, 'Cuentas');
-              },
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         title: const Text('Cuentas'),
       ),
@@ -68,7 +44,7 @@ class CuentasScreen extends StatelessWidget {
                                                 onPressed: () {  },
                                               ),
                                           );
-                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                     child: ListTile(
                               leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),

@@ -186,20 +186,20 @@ class DBProvider {
 
   Future<CategoriaModel> getCategoriaById(int id) async {
     final db = await database;
-    final res = await db!.query('categoria', where: 'id = ?', whereArgs: [id]);
+    final res = await db!.query('categorias', where: 'id = ?', whereArgs: [id]);
 
     return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', tipoCategoria: '');
   }
 
   Future<int> deleteCategoria(int id) async {
     final db = await database;
-    final res = await db!.delete('categoria', where: 'id = ?', whereArgs: [id]);
+    final res = await db!.delete('categorias', where: 'id = ?', whereArgs: [id]);
     return res;
   }
 
   Future<int> updateCategoria(CategoriaModel nuevaCategoria) async {
     final db = await database;
-    final res = await db!.update('cuentas', nuevaCategoria.toJson(),
+    final res = await db!.update('categorias', nuevaCategoria.toJson(),
         where: 'id = ?', whereArgs: [nuevaCategoria.id]);
 
     return res;
