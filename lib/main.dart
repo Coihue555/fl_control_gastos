@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
             title: 'Movimientos',
             initialRoute: 'Home',
             routes: {
-              'Home': (_) => const HomeScreen(),
-              'MovimientosFicha': (_) => FichaMovimientoScreen(),
-              'CuentasFicha': (_) => CuentaFichaScreen(),
-              'Cuentas': (_) => const CuentasScreen(),
+              'Home'            : (_) => const HomeScreen(),
+              'MovimientosFicha': (_) => MovimientosFichaScreen(),
+              'CuentasFicha'    : (_) => CuentaFichaScreen(),
+              'Cuentas'         : (_) => const CuentasScreen(),
             });
       }),
     );

@@ -12,7 +12,6 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
   @override
   Widget build(BuildContext context) {
     String nombreCuenta = '';
-    String tipoCuenta = '';
 
     return BlocListener<CuentasBloc, CuentasState>(
       listenWhen: (previous, current) => !current.isWorking,
@@ -46,27 +45,17 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: 'Tipo de Cuenta',
-                                      ),
-                                      initialValue: state.cuenta.tipoCuenta,
-                                      onChanged:( value ) {tipoCuenta = value; },
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    
                                     ElevatedButton(
                                         child: const SizedBox(
                                             width: double.infinity,
                                             child: Center(child: Text('Guardar'))),
                                         onPressed: () {
                                           if(nombreCuenta.isEmpty){nombreCuenta = state.cuenta.nombreCuenta;}
-                                          if(tipoCuenta.isEmpty){tipoCuenta = state.cuenta.tipoCuenta;}
                                           
                                           context
                                               .read<CuentasBloc>()
-                                              .add(ValidateCuenta(nombreCuenta, tipoCuenta));
+                                              .add(ValidateCuenta(nombreCuenta));
                                         }),
                                   ],
                                 ),

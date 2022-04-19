@@ -7,7 +7,7 @@ part 'categorias_state.dart';
 
 class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
   CategoriasBloc() : super(CategoriasState()) {
-    on<GetCategoriasList>(_getCategoriasList);
+    on<GetCategoriaList>(_getCategoriasList);
     on<NewCategoria>(_newCategoria);
     on<GuardarCategoria>(_guardarCategoria);
     on<UpdateCategoria>(_updateCategoria);
@@ -34,7 +34,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
     emit(state.copyWith( isWorking: false, accion: 'GuardarCategoria', error: error, lista: lista ));
   }
 
-  Future<void> _getCategoriasList(GetCategoriasList event, Emitter emit) async {
+  Future<void> _getCategoriasList(GetCategoriaList event, Emitter emit) async {
     emit(state.copyWith(
       isWorking: true,
       accion: 'GetCategoriasList',
@@ -42,7 +42,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
       error: '',
       categoria: CategoriaModel(nombreCategoria: '', tipoCategoria: '', ),
     ));
-    final List<CategoriaModel> lst = await DBProvider.db.getCategoria();
+    final List<CategoriaModel> lst = await DBProvider.db.getCategorias();
     emit(state.copyWith(
       lista: lst,
       accion: 'GetCategoriaList',

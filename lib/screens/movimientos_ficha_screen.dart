@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
 
-class FichaMovimientoScreen extends StatefulWidget {
+class MovimientosFichaScreen extends StatefulWidget {
   @override
-  State<FichaMovimientoScreen> createState() => _FichaMovimientoScreenState();
+  State<MovimientosFichaScreen> createState() => _MovimientosFichaScreenState();
 }
 
-class _FichaMovimientoScreenState extends State<FichaMovimientoScreen> {
+class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';

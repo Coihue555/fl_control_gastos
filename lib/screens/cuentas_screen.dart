@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
-class CategoriasScreen extends StatelessWidget {
-  const CategoriasScreen({Key? key}) : super(key: key);
+class CuentasScreen extends StatelessWidget {
+  const CuentasScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,12 @@ class CategoriasScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Categorias', style: TextStyle(fontSize: 30, color: Colors.white)),
+              child: Text('Control de Gastos', style: TextStyle(fontSize: 30, color: Colors.white)),
             ),
             ListTile(
               title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
               onTap: () {
-                Navigator.pushNamed(context, 'CuentasFicha');
+                Navigator.pushNamed(context, 'Cuentas');
               },
             ),
             const Divider(),
@@ -35,19 +35,19 @@ class CategoriasScreen extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Categorias'),
+        title: const Text('Cuentas'),
       ),
-      body: BlocConsumer<CategoriasBloc, CategoriasState>(
+      body: BlocConsumer<CuentasBloc, CuentasState>(
         listenWhen: (previous, current) => !current.isWorking,
         listener: (context, state) {
-          if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-            Navigator.pushNamed(context, 'CategoriaFicha');
+          if (state.accion == 'NewCuenta' || state.accion == 'UpdateCuenta') {
+            Navigator.pushNamed(context, 'CuentasFicha');
           }
           if (state.error.isNotEmpty) {
             print(state.error);
           }
-          if (state.accion == 'ValidateCategoria' && state.error.isEmpty) {
-            context.read<CategoriasBloc>().add(GuardarCategoria());
+          if (state.accion == 'ValidateCuenta' && state.error.isEmpty) {
+            context.read<CuentasBloc>().add(GuardarCuenta());
           }
         },
         builder: (context, state) {
@@ -60,7 +60,7 @@ class CategoriasScreen extends StatelessWidget {
                                 color: Colors.red,
                               ),
                     onDismissed: (DismissDirection direction) {
-                                context.read<CategoriasBloc>().add(DeleteCategoria(state.lista[i].id!));
+                                context.read<CuentasBloc>().add(DeleteCuenta(state.lista[i].id!));
                                 final snackBar = SnackBar(
                                               content: const Text('Registro eliminado'),
                                               action: SnackBarAction(
@@ -72,27 +72,25 @@ class CategoriasScreen extends StatelessWidget {
                               },
                     child: ListTile(
                               leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
-                              title: Text(state.lista[i].nombreCategoria),
-                              subtitle: Text(state.lista[i].tipoCategoria,),
+                              title: Text(state.lista[i].nombreCuenta),
                               trailing: Container(
                                 width: 150,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: const [
-                                    //Text('\$' +state.lista[i].valor.toString(), style: TextStyle(color:Colors.green[300], fontWeight: FontWeight.bold, fontSize: 20),),
                                     Icon(Icons.chevron_right),
                                   ],
                                 ),
                               ),
                               onTap: () {
-                                context.read<CategoriasBloc>().add(UpdateCategoria(state.lista[i].id!));
+                                context.read<CuentasBloc>().add(UpdateCuenta(state.lista[i].id!));
                               }
                             ),
                   ),
                 );
           } else {
             return const Center(
-                child: Text('Aun no hay Categorias cargadas'),
+                child: Text('Aun no hay Cuentas cargadas'),
               );
           }
         },
@@ -101,7 +99,7 @@ class CategoriasScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          context.read<CategoriasBloc>().add(NewCategoria());
+          context.read<CuentasBloc>().add(NewCuenta());
         },
       ),
     );

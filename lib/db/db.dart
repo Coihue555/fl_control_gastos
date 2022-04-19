@@ -152,7 +152,7 @@ class DBProvider {
     final db = await database;
     final res = await db!.query('cuentas', where: 'id = ?', whereArgs: [id]);
 
-    return res.isNotEmpty ? CuentaModel.fromJson(res.first) : CuentaModel(nombreCuenta: '', tipoCuenta: '');
+    return res.isNotEmpty ? CuentaModel.fromJson(res.first) : CuentaModel(nombreCuenta: '');
   }
 
   Future<int> deleteCuenta(int id) async {
