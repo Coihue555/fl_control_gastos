@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'package:fl_control_gastos/screens/cuentas_drop_screen.dart';
+import 'package:fl_control_gastos/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,6 +62,14 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                     const SizedBox(
                                       height: 10,
                                     ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: const [
+                                        CuentasDropScreen(),
+                                        customDropdown(),
+                                      ],
+                                    ),
+                                    
                                     TextFormField(
                                       decoration: const InputDecoration(
                                         labelText: 'Descripcion',

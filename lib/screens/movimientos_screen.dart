@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
+import 'package:fl_control_gastos/bloc/blocs.dart';
+import 'package:fl_control_gastos/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,32 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Control de Gastos', style: TextStyle(fontSize: 30, color: Colors.white)),
-            ),
-            ListTile(
-              title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
-              onTap: () {
-                Navigator.pushNamed(context, 'Cuentas');
-              },
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
-              onTap: () {
-                Navigator.pushNamed(context, 'Categorias');
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         title: const Text('Movimientos'),
       ),

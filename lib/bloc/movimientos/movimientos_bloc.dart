@@ -93,7 +93,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
 
   Future<void> _deleteMovimiento(DeleteMovimiento event, Emitter emit) async {
     emit(state.copyWith(isWorking: true, accion: 'DeleteMovimiento', error: ''));
-    await DBProvider.db.deleteDato(event.id);
+    await DBProvider.db.deleteItem('transacciones', event.id);
 
     // final List<MovimientosModel> lst = await DBProvider.db.getTodos();
 

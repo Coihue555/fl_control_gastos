@@ -49,21 +49,14 @@ class CuentasScreen extends StatelessWidget {
                     child: ListTile(
                               leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
                               title: Text(state.lista[i].nombreCuenta),
-                              trailing: Container(
-                                width: 150,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: const [
-                                    Icon(Icons.chevron_right),
-                                  ],
-                                ),
-                              ),
+                              trailing: const Icon(Icons.chevron_right),
                               onTap: () {
                                 context.read<CuentasBloc>().add(UpdateCuenta(state.lista[i].id!));
                               }
                             ),
                   ),
                 );
+                
           } else {
             return const Center(
                 child: Text('Aun no hay Cuentas cargadas'),

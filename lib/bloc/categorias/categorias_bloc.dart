@@ -91,7 +91,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
 
   Future<void> _deleteCategoria(DeleteCategoria event, Emitter emit) async {
     emit(state.copyWith(isWorking: true, accion: 'DeleteCategoria', error: ''));
-    await DBProvider.db.deleteDato(event.id);
+    await DBProvider.db.deleteItem('categorias', event.id);
 
     // final List<MovimientosModel> lst = await DBProvider.db.getTodos();
 

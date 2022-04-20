@@ -44,7 +44,7 @@ class CategoriasScreen extends StatelessWidget {
                                                 onPressed: () {  },
                                               ),
                                           );
-                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                     child: ListTile(
                               leading: const Icon(Icons.calculate, color: Colors.blue),
@@ -55,7 +55,6 @@ class CategoriasScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: const [
-                                    //Text('\$' +state.lista[i].valor.toString(), style: TextStyle(color:Colors.green[300], fontWeight: FontWeight.bold, fontSize: 20),),
                                     Icon(Icons.chevron_right),
                                   ],
                                 ),

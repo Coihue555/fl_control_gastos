@@ -119,18 +119,6 @@ class DBProvider {
     return res;
   }
 
-  Future<int> deleteDato(int id) async {
-    final db = await database;
-    final res = await db!.delete('transacciones', where: 'id = ?', whereArgs: [id]);
-    return res;
-  }
-
-  Future<int> deleteAllDeportes() async {
-    final db = await database;
-    final res = await db!.delete('transacciones');
-    return res;
-  }
-
 
   // Cuentas
   Future<int> nuevaCuenta(CuentaModel nuevaCuenta) async {
@@ -154,9 +142,9 @@ class DBProvider {
     return res.isNotEmpty ? CuentaModel.fromJson(res.first) : CuentaModel(nombreCuenta: '');
   }
 
-  Future<int> deleteCuenta(int id) async {
+  Future<int> deleteItem(String table, int id) async {
     final db = await database;
-    final res = await db!.delete('cuentas', where: 'id = ?', whereArgs: [id]);
+    final res = await db!.delete(table, where: 'id = ?', whereArgs: [id]);
     return res;
   }
 
@@ -189,12 +177,6 @@ class DBProvider {
     final res = await db!.query('categorias', where: 'id = ?', whereArgs: [id]);
 
     return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', tipoCategoria: '');
-  }
-
-  Future<int> deleteCategoria(int id) async {
-    final db = await database;
-    final res = await db!.delete('categorias', where: 'id = ?', whereArgs: [id]);
-    return res;
   }
 
   Future<int> updateCategoria(CategoriaModel nuevaCategoria) async {
