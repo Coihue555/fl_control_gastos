@@ -23,7 +23,7 @@ class DBProvider {
 
   Future<dynamic> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'conga12DB.db');
+    final path = join(documentsDirectory.path, 'conga14DB.db');
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
@@ -32,6 +32,7 @@ class DBProvider {
             id INTEGER PRIMARY KEY,
             categoria TEXT,
             cuenta TEXT,
+            fecha TEXT,
             descripcion TEXT,
             valor REAL
           )
@@ -65,6 +66,7 @@ class DBProvider {
     final id = nuevoDato.id;
     final categoria = nuevoDato.categoria;
     final cuenta = nuevoDato.cuenta;
+    final fecha = nuevoDato.fecha;
     final descripcion = nuevoDato.descripcion;
     final valor = nuevoDato.valor;
 
@@ -72,8 +74,8 @@ class DBProvider {
     final db = await database;
 
     final res = await db!.rawInsert('''
-      INSERT INTO transacciones(id, categoria, cuenta, descripcion, valor)
-        VALUES( $id, '$categoria', '$cuenta', '$descripcion', '$valor' )
+      INSERT INTO transacciones(id, categoria, cuenta, fecha, descripcion, valor)
+        VALUES( $id, '$categoria', '$cuenta', '$fecha', '$descripcion', '$valor' )
       ''');
 
     return res;
@@ -90,7 +92,7 @@ class DBProvider {
     final db = await database;
     final res = await db!.query('transacciones', where: 'id = ?', whereArgs: [id]);
 
-    return res.isNotEmpty ? MovimientosModel.fromJson(res.first) : MovimientosModel(categoria: '', cuenta: '', descripcion: '', valor: 0.0);
+    return res.isNotEmpty ? MovimientosModel.fromJson(res.first) : MovimientosModel(categoria: '', cuenta: '', fecha: '', descripcion: '', valor: 0.0);
   }
 
   Future<List<MovimientosModel>> getTodos() async {
@@ -108,7 +110,7 @@ class DBProvider {
 
       return res.isNotEmpty
         ? res.map((s) => MovimientosModel.fromJson(s)).toList().first
-        : MovimientosModel(categoria: '', cuenta: '', descripcion: '', valor: 0.0);
+        : MovimientosModel(categoria: '', cuenta: '', fecha: '', descripcion: '', valor: 0.0);
     }
 
   Future<int> updateDato(MovimientosModel nuevoDato) async {

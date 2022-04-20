@@ -15,7 +15,7 @@ class MovimientosState {
       this.error = '',
       this.accion = ''})
       : lista = lista ?? [],
-        movimiento = movimiento ?? MovimientosModel(categoria: '', cuenta: '');
+        movimiento = movimiento ?? MovimientosModel(categoria: '', cuenta: '', fecha: '');
 
   MovimientosState copyWith({
     final bool? isWorking,

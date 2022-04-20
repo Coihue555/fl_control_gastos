@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_print
-import 'package:fl_control_gastos/screens/cuentas_drop_screen.dart';
-import 'package:fl_control_gastos/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
 
@@ -15,9 +14,32 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
-    String spCuenta = 'Efectivo';
+    String spCuenta = '';
     String spDescripcion = '';
     double spValor = 0.0;
+    //DateTime _selectedDate = DateTime.now();
+    String fechaElegida = DateTime.now().toString();
+
+
+      // String _presentDatePicker() {
+      //   showDatePicker(
+      //     context: context,
+      //     initialDate: DateTime.now(),
+      //     firstDate: DateTime(2022),
+      //     lastDate: DateTime.now()
+      //   )
+      //   .then((pickedDate) {
+      //     if (pickedDate == null) {
+      //       return pickedDate = DateTime.now();
+      //     }
+      //     setState(() {
+      //       _selectedDate = pickedDate!;
+      //       String fechaElegida = DateFormat('yyyy-MM-dd').format(_selectedDate);
+      //       print(fechaElegida);
+      //     });
+      //   });
+      //   return fechaElegida;
+      // }
 
     return BlocListener<MovimientosBloc, MovimientosState>(
       listenWhen: (previous, current) => !current.isWorking,
@@ -48,7 +70,6 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                         spCategoria = value;
                                       },
                                     ),
-
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -62,14 +83,17 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: const [
-                                        CuentasDropScreen(),
-                                        customDropdown(),
-                                      ],
+                                    InputDatePickerFormField(
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(2022),
+                                      lastDate: DateTime.now(),
+                                      onDateSaved: (value){
+                                        fechaElegida = value.toString();
+                                      },
+                                      ),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                    
                                     TextFormField(
                                       decoration: const InputDecoration(
                                         labelText: 'Descripcion',
@@ -90,7 +114,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                         FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
                                       ],
                                       onChanged: (value) {
-                                       state.movimiento.valor = double.tryParse(value) ?? 0;
+                                       spValor = double.tryParse(value) ?? 0;
                                       },
                                     ),
                                     ElevatedButton(
@@ -98,12 +122,12 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                             width: double.infinity,
                                             child: Center(child: Text('Guardar'))),
                                         onPressed: () {
-                                          if(spCategoria.isEmpty){spCategoria = state.movimiento.categoria;}
-                                          if(spDescripcion.isEmpty){spDescripcion = state.movimiento.descripcion;}
+                                          // if(spCategoria.isEmpty){spCategoria = state.movimiento.categoria;}
+                                          // if(spDescripcion.isEmpty){spDescripcion = state.movimiento.descripcion;}
                                           
                                           context
                                               .read<MovimientosBloc>()
-                                              .add(ValidateMovimiento(spCategoria, spCuenta, spDescripcion, spValor));
+                                              .add(ValidateMovimiento(spCategoria, spCuenta, fechaElegida, spDescripcion, spValor));
                                         }),
                                   ],
                                 ),

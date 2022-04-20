@@ -48,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                               },
                     child: ListTile(
                               leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
-                              title: Text(state.lista[i].categoria),
-                              subtitle: Text(state.lista[i].descripcion,),
+                              title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
+                              subtitle: Text(state.lista[i].fecha),
                               trailing: Container(
                                 width: 150,
                                 child: Row(

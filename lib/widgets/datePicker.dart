@@ -1,46 +1,44 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:intl/intl.dart';
 
 class CustomDatePicker extends StatefulWidget {
+  const CustomDatePicker({Key? key}) : super(key: key);
+
   @override
-  _CustomDatePickerState createState()
-  {
-    return _CustomDatePickerState();
-  }
+  _CustomDatePickerState createState() => _CustomDatePickerState();
 }
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
-String date = "";
-DateTime selectedDate = DateTime.now();
+  DateTime? _selectedDate;
+  String? fechaElegida;
+
+  String _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2022),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      if (pickedDate == null) {
+        return null;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+        String fechaElegida = DateFormat('yyyy-MM-dd').format(_selectedDate!);
+        print(fechaElegida);
+      });
+    });
+
+    return fechaElegida ?? '';
+  }
+  
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-                onPressed: () {
-                  _selectDate(context);
-                },
-              child: const Text("Choose Date"),
-            ),
-            Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")
-          ],
-        ),
-      );
-  }
 
-  _selectDate(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2025), 
+    
+    return ElevatedButton(
+            onPressed: _presentDatePicker, child: const Text('Fecha')
     );
-    if (selected != null && selected != selectedDate)
-      setState(() {
-        selectedDate = selected;
-      });
   }
 }

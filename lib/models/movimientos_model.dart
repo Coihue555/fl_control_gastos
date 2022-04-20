@@ -2,6 +2,7 @@ class MovimientosModel {
   int? id;
   String categoria;
   String cuenta;
+  String fecha;
   String descripcion;
   double valor;
 
@@ -9,6 +10,7 @@ class MovimientosModel {
     this.id,
     required this.categoria,
     required this.cuenta,
+    required this.fecha,
     this.descripcion = '',
     this.valor = 0.0});
 
@@ -16,6 +18,7 @@ class MovimientosModel {
     int? id,
     String categoria = '',
     String cuenta = '',
+    String fecha ='',
     String? descripcion,
     double? valor
   }) =>
@@ -23,6 +26,7 @@ class MovimientosModel {
           id: id ?? this.id,
           categoria: categoria,
           cuenta: cuenta,
+          fecha: fecha,
           descripcion: descripcion ?? this.descripcion,
           valor: valor ?? this.valor);
 
@@ -30,10 +34,11 @@ class MovimientosModel {
         id: json["id"],
         categoria: json["categoria"],
         cuenta: json["cuenta"],
+        fecha: json["fecha"],
         descripcion: json["descripcion"],
         valor: json["valor"]
       );
 
   Map<String, dynamic> toJson() =>
-      {"id": id, "categoria": categoria, "cuenta": cuenta, "descripcion": descripcion, "valor": valor};
+      {"id": id, "categoria": categoria, "cuenta": cuenta, "fecha": fecha, "descripcion": descripcion, "valor": valor};
 }

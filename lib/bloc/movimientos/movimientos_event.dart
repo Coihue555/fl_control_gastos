@@ -25,10 +25,11 @@ class GuardarMovimiento extends MovimientosEvent{
 class ValidateMovimiento extends MovimientosEvent{
   final String categoria;
   final String cuenta;
+  final String fecha;
   final String descripcion;
   final double valor;
   
-  ValidateMovimiento(this.categoria, this.cuenta, this.descripcion, this.valor);
+  ValidateMovimiento(this.categoria, this.cuenta, this.fecha, this.descripcion, this.valor);
 }
 
 class DeleteMovimiento extends MovimientosEvent{

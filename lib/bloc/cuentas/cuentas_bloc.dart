@@ -89,7 +89,7 @@ class CuentasBloc extends Bloc<CuentasEvent, CuentasState> {
 
   Future<void> _deleteCuenta(DeleteCuenta event, Emitter emit) async {
     emit(state.copyWith(isWorking: true, accion: 'DeleteCuenta', error: ''));
-    await DBProvider.db.deleteItem('cuenta', event.id);
+    await DBProvider.db.deleteItem('cuentas', event.id);
 
     // final List<MovimientosModel> lst = await DBProvider.db.getTodos();
 

@@ -46,7 +46,7 @@ class CuentasDropScreen extends StatelessWidget {
             },
             
 
-            items: <String>['one', 'two']
+            items: <String>['One', 'two']
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,

@@ -41,7 +41,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
       accion: 'GetMovimientosList',
       lista: [],
       error: '',
-      movimiento: MovimientosModel(categoria: '', cuenta: ''),
+      movimiento: MovimientosModel(categoria: '', cuenta: '', fecha: ''),
     ));
     final List<MovimientosModel> lst = await DBProvider.db.getTodos();
     emit(state.copyWith(
@@ -54,7 +54,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
 
   Future<void> _newMovimiento(NewMovimiento event, Emitter emit) async {
     emit(state.copyWith(
-        isWorking: false, accion: 'NewMovimiento', movimiento: MovimientosModel(categoria: '', cuenta: ''), error: ''));
+        isWorking: false, accion: 'NewMovimiento', movimiento: MovimientosModel(categoria: '', fecha: '', cuenta: ''), error: ''));
   }
 
   Future<void> _updateMovimiento(UpdateMovimiento event, Emitter emit) async {
@@ -82,6 +82,8 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
     }
     modelo.descripcion = event.descripcion;
     modelo.cuenta = event.cuenta;
+    modelo.fecha = event.fecha;
+    modelo.valor = event.valor;
 
     emit(state.copyWith(
       isWorking: false,
