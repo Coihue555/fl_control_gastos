@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
 
@@ -11,35 +10,17 @@ class MovimientosFichaScreen extends StatefulWidget {
 }
 
 class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
+
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
     String spCuenta = '';
     String spDescripcion = '';
     double spValor = 0.0;
-    //DateTime _selectedDate = DateTime.now();
     String fechaElegida = DateTime.now().toString();
 
 
-      // String _presentDatePicker() {
-      //   showDatePicker(
-      //     context: context,
-      //     initialDate: DateTime.now(),
-      //     firstDate: DateTime(2022),
-      //     lastDate: DateTime.now()
-      //   )
-      //   .then((pickedDate) {
-      //     if (pickedDate == null) {
-      //       return pickedDate = DateTime.now();
-      //     }
-      //     setState(() {
-      //       _selectedDate = pickedDate!;
-      //       String fechaElegida = DateFormat('yyyy-MM-dd').format(_selectedDate);
-      //       print(fechaElegida);
-      //     });
-      //   });
-      //   return fechaElegida;
-      // }
+
 
     return BlocListener<MovimientosBloc, MovimientosState>(
       listenWhen: (previous, current) => !current.isWorking,
@@ -80,17 +61,6 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                       initialValue: state.movimiento.cuenta,
                                       onChanged:( value ) {spCuenta = value; },
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    InputDatePickerFormField(
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2022),
-                                      lastDate: DateTime.now(),
-                                      onDateSaved: (value){
-                                        fechaElegida = value.toString();
-                                      },
-                                      ),
                                     const SizedBox(
                                       height: 10,
                                     ),

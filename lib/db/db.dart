@@ -23,7 +23,7 @@ class DBProvider {
 
   Future<dynamic> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'conga14DB.db');
+    final path = join(documentsDirectory.path, 'conga15DB.db');
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
