@@ -14,7 +14,7 @@ class _CuentasDropScreenState extends State<CuentasDropScreen> {
   @override
   Widget build(BuildContext context) {
 
-    const String dropdownValue = 'One';
+    const String dropdownValue = 'Santander';
     
 
     return Scaffold(
@@ -35,29 +35,31 @@ class _CuentasDropScreenState extends State<CuentasDropScreen> {
           
 
           if (state.lista.isNotEmpty) {
-            return DropdownButton<String>(
-            value: dropdownValue,
-            icon: const Icon(Icons.arrow_drop_down),
-            elevation: 16,
-            style: const TextStyle(color: Colors.deepPurple),
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            onChanged: (String? newValue) {
+            return Center(
+              child: DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_drop_down),
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? newValue) {
+                
+              },
               
-            },
-            
-            
+              
 
-            items: state.lista
-                .map<DropdownMenuItem<String>>((CuentaModel value) {
-              return DropdownMenuItem<String>(
-                value: value.nombreCuenta,
-                child: Text(value.nombreCuenta),
-              );
-            }).toList(),
-          );
+              items: state.lista
+                  .map<DropdownMenuItem<String>>((CuentaModel value) {
+                return DropdownMenuItem<String>(
+                  value: value.nombreCuenta,
+                  child: Text(value.nombreCuenta),
+                );
+              }).toList(),
+          ),
+            );
           } else {
             return const Center(
                 child: Text('Aun no hay Cuentas creadas'),
