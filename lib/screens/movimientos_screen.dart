@@ -38,24 +38,31 @@ class HomeScreen extends StatelessWidget {
                     onDismissed: (DismissDirection direction) {
                                 context.read<MovimientosBloc>().add(DeleteMovimiento(state.lista[i].id!));
                                 final snackBar = SnackBar(
-                                              content: const Text('Registro eliminado'),
-                                              action: SnackBarAction(
-                                                label: 'Entendido',
-                                                onPressed: () {  },
-                                              ),
-                                          );
-                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    content: const Text('Registro eliminado'),
+                                    action: SnackBarAction(
+                                      label: 'Entendido',
+                                      onPressed: () {  },
+                                    ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                     child: ListTile(
                               leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
                               title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
-                              subtitle: Text(state.lista[i].fecha.substring(0,10)),
+                              subtitle: Text(state.lista[i].fecha),
                               trailing: Container(
                                 width: 150,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Text('\$' +state.lista[i].valor.toString(), style: TextStyle(color:Colors.green[300], fontWeight: FontWeight.bold, fontSize: 20),),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('\$' +state.lista[i].valor.toString(), style: TextStyle(color:Colors.green[300], fontWeight: FontWeight.bold, fontSize: 15),),
+                                        Text(state.lista[i].cuenta),
+                                      ],
+                                    ),
+                                    const SizedBox(width: 5,),
                                     const Icon(Icons.chevron_right),
                                   ],
                                 ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class customDropdown extends StatelessWidget {
-  const customDropdown({Key? key}) : super(key: key);
+class CustomDropdown extends StatelessWidget {
+  const CustomDropdown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    final String dropdownValue = 'One';
+    const String dropdownValue = 'One';
 
     return DropdownButton<String>(
       value: dropdownValue,
