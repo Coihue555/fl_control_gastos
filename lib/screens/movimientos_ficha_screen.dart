@@ -1,9 +1,10 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fl_control_gastos/widgets/drop3.dart';
+import 'package:fl_control_gastos/bloc/blocs.dart';
 
 class MovimientosFichaScreen extends StatefulWidget {
   @override
@@ -141,6 +142,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                       initialValue: state.movimiento.descripcion,
                       onChanged:( value ) {spDescripcion = value; },
                     ),
+                    DropdownItem(),
                     
 
                     

@@ -38,12 +38,12 @@ class CuentasScreen extends StatelessWidget {
                     onDismissed: (DismissDirection direction) {
                                 context.read<CuentasBloc>().add(DeleteCuenta(state.lista[i].id!));
                                 final snackBar = SnackBar(
-                                              content: const Text('Registro eliminado'),
-                                              action: SnackBarAction(
-                                                label: 'Entendido',
-                                                onPressed: () {  },
-                                              ),
-                                          );
+                                    content: const Text('Registro eliminado'),
+                                    action: SnackBarAction(
+                                      label: 'Entendido',
+                                      onPressed: () {  },
+                                    ),
+                                );
                                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                     child: ListTile(
