@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/movimientos/movimientos_bloc.dart';
+import 'package:intl/intl.dart';
 
 class MovimientosFichaScreen extends StatefulWidget {
   @override
@@ -11,13 +12,21 @@ class MovimientosFichaScreen extends StatefulWidget {
 
 class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
 
+  TextEditingController dateinput = TextEditingController(); 
+  //text editing controller for text field
+  
+  @override
+  void initState() {
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
     String spCuenta = '';
     String spDescripcion = '';
     double spValor = 0.0;
-    String fechaElegida = DateTime.now().toString();
 
 
 
@@ -42,6 +51,39 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                       return Form(
                                 child: Column(
                                   children: [
+
+                                        TextField(
+                                            controller: dateinput, //editing controller of this TextField
+                                            decoration: const InputDecoration( 
+                                              icon: Icon(Icons.calendar_today), //icon of text field
+                                              labelText: "Enter Date" //label text of field
+                                            ),
+                                            readOnly: true,  //set it true, so that user will not able to edit text
+                                            onTap: () async {
+                                              DateTime? pickedDate = await showDatePicker(
+                                                  context: context, initialDate: DateTime.now(),
+                                                  firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                                                  lastDate: DateTime(2101)
+                                              );
+                                              
+                                              if(pickedDate != null ){
+                                                  print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+                                                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); 
+                                                  print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                                    //you can implement different kind of Date Format here according to your requirement
+
+                                                  setState(() {
+                                                    dateinput.text = formattedDate; //set output date to TextField value. 
+                                                  });
+                                              }else{
+                                                  print("Date is not selected");
+                                              }
+                                            },
+                                        ),
+
+
+
+
                                     TextFormField(
                                       decoration: const InputDecoration(
                                         labelText: 'Categoria',
@@ -97,7 +139,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                           
                                           context
                                               .read<MovimientosBloc>()
-                                              .add(ValidateMovimiento(spCategoria, spCuenta, fechaElegida, spDescripcion, spValor));
+                                              .add(ValidateMovimiento(spCategoria, spCuenta, dateinput.text, spDescripcion, spValor));
                                         }),
                                   ],
                                 ),
