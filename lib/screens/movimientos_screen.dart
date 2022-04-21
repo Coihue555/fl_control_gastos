@@ -58,7 +58,12 @@ class HomeScreen extends StatelessWidget {
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text('\$' +state.lista[i].valor.toString(), style: TextStyle(color:Colors.green[300], fontWeight: FontWeight.bold, fontSize: 15),),
+                                        Text('\$' +state.lista[i].valor.toString(),
+                                          style: TextStyle(
+                                            color:Colors.green[300], 
+                                            fontWeight: FontWeight.bold, 
+                                            fontSize: 15),
+                                        ),
                                         Text(state.lista[i].cuenta),
                                       ],
                                     ),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_control_gastos/widgets/drop3.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
+import 'package:fl_control_gastos/models/models.dart';
 
 class MovimientosFichaScreen extends StatefulWidget {
   @override
@@ -24,15 +24,16 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
-    String spCuenta = '';
     String spDescripcion = '';
     double spValor = 0.0;
+    String dropdownCuenta = 'Efectivo';
+    String dropdownCategoria = 'Comida';
 
     return BlocListener<MovimientosBloc, MovimientosState>(
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'GuardarMovimiento' && state.error.isEmpty) {
-          Navigator.pop(context);
+          Navigator.pushNamed(context, 'Home');
         }
       },
       child: Scaffold(
@@ -51,6 +52,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                       children: [
                         Expanded(
                           child: TextField(
+                            style: const TextStyle(fontSize: 20, color: Colors.black54),
                             controller: dateinput,
                             decoration: const InputDecoration( 
                               icon: Icon(Icons.calendar_today),
@@ -60,7 +62,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
                                   context: context,
-                                  initialDate: DateTime.now(),
+                                  initialDate: (state.movimiento.fecha == '' ) ? DateTime.now() : DateTime.parse(state.movimiento.fecha),
                                   firstDate: DateTime(2020),
                                   lastDate: DateTime(2030)
                               );
@@ -72,7 +74,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                       dateinput.text = formattedDate;
                                     });
                                 }else{
-                                    print("No se selecciono fecha");
+                                    print('No se eligio fecha');
                                 }
                               },
                           ),
@@ -82,6 +84,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
 
                         Expanded(
                           child: TextFormField(
+                            style: const TextStyle(fontSize: 20, color: Colors.black54),
                             decoration: const InputDecoration(
                               labelText: 'Valor',
                             ),
@@ -100,34 +103,75 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
 
                     
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
 
                     Row(
                       children: [
-                        Expanded(
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Categoria',
-                            ),
-                            initialValue: state.movimiento.categoria,
-                            onChanged: (value) {
-                              spCategoria = value;
-                            },
-                          ),
+                        BlocConsumer<CategoriasBloc, CategoriasState>(
+                          listenWhen: (previous, current) => !current.isWorking,
+                          listener: (context, state) {  },
+                          builder: (context, state) {
+
+                            if (state.lista.isNotEmpty) {
+                              return DropdownButton<String>(
+                                value: dropdownCategoria,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 10,
+                                style: const TextStyle(fontSize: 25, color: Colors.black54),
+                                onChanged: (String? newValue) {
+                                  dropdownCategoria = newValue!;
+                                },
+
+                                items: state.lista
+                                  .map<DropdownMenuItem<String>>((CategoriaModel value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.nombreCategoria,
+                                      child: Text(value.nombreCategoria),
+                                    );
+                                  }).toList(),
+                              );
+                            } else {
+                              return const Center(
+                                  child: Text('Aun no hay Categorias creadas'),
+                                );
+                            }
+                          },
                         ),
 
-                        const SizedBox(width: 10,),
+                        Expanded(child: Container(width: 10,)),
+                        
+                        
+                        BlocConsumer<CuentasBloc, CuentasState>(
+                          listenWhen: (previous, current) => !current.isWorking,
+                          listener: (context, state) {  },
+                          builder: (context, state) {
 
-                        Expanded(
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Cuenta',
-                            ),
-                            initialValue: state.movimiento.cuenta,
-                            onChanged:( value ) {spCuenta = value; },
-                          ),
-                        ),
+                            if (state.lista.isNotEmpty) {
+                              return DropdownButton<String>(
+                                value: dropdownCuenta,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 10,
+                                style: const TextStyle(fontSize: 25, color: Colors.black54),
+                                onChanged: (String? newValue) {
+                                  dropdownCuenta = newValue!;
+                                },
+
+                                items: state.lista
+                                  .map<DropdownMenuItem<String>>((CuentaModel value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.nombreCuenta,
+                                      child: Text(value.nombreCuenta),
+                                    );
+                                  }).toList(),
+                              );
+                            } else {
+                              return const Center(
+                                  child: Text('Aun no hay Cuentas creadas'),
+                                );
+                            }
+                          },
+                        )
                       ],
                     ),
 
@@ -140,9 +184,11 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                         labelText: 'Descripcion',
                       ),
                       initialValue: state.movimiento.descripcion,
-                      onChanged:( value ) {spDescripcion = value; },
+                      onChanged:( value ) {
+                          spDescripcion = value;
+                        },
                     ),
-                    DropdownItem(),
+                    
                     
 
                     
@@ -150,13 +196,17 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                         child: const SizedBox(
                             width: double.infinity,
                             child: Center(child: Text('Guardar'))),
-                        onPressed: () {
-                          // if(spCategoria.isEmpty){spCategoria = state.movimiento.categoria;}
-                          // if(spDescripcion.isEmpty){spDescripcion = state.movimiento.descripcion;}
+                        onPressed: () {          
+                          if(spCategoria.isEmpty){spCategoria = state.movimiento.categoria;}
+                          if(spDescripcion.isEmpty){spDescripcion = state.movimiento.descripcion;}
+                          if(spValor == 0.0){spValor = state.movimiento.valor;}
+                          if(dateinput.text.isEmpty){dateinput.text = state.movimiento.fecha;}
+
                           
+                
                           context
                               .read<MovimientosBloc>()
-                              .add(ValidateMovimiento(spCategoria, spCuenta, dateinput.text, spDescripcion, spValor));
+                              .add(ValidateMovimiento(dropdownCategoria, dropdownCuenta, dateinput.text, spDescripcion, spValor));
                         }),
                     ],
                   ),

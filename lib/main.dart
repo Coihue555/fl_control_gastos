@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Movimientos',
-            initialRoute: 'CuentasDrop',
+            initialRoute: 'Home',
             routes: {
               'Home'            : (_) => const HomeScreen(),
               'MovimientosFicha': (_) => MovimientosFichaScreen(),
@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
               'CuentasFicha'    : (_) => CuentaFichaScreen(),
               'Categorias'      : (_) => const CategoriasScreen(),
               'CategoriasFicha' : (_) => CategoriasFichaScreen(),
-              'CuentasDrop'     : (_) => const CuentasDropScreen(),
             });
       }),
     );

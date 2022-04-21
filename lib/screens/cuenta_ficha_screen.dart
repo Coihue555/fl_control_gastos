@@ -17,7 +17,7 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
-          Navigator.pop(context);
+          Navigator.pushNamed(context, 'Cuentas');
         }
       },
       child: Scaffold(

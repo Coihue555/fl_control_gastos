@@ -102,16 +102,16 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];
   }
 
-    Future<MovimientosModel> getDatosByCategoria(String categoria) async {
-      final db = await database;
-      final res = await db!.rawQuery('''
-        SELECT * FROM transacciones WHERE categoria = '$categoria'
-      ''');
+  Future<MovimientosModel> getDatosByCategoria(String categoria) async {
+    final db = await database;
+    final res = await db!.rawQuery('''
+      SELECT * FROM transacciones WHERE categoria = '$categoria'
+    ''');
 
-      return res.isNotEmpty
-        ? res.map((s) => MovimientosModel.fromJson(s)).toList().first
-        : MovimientosModel(categoria: '', cuenta: '', fecha: '', descripcion: '', valor: 0.0);
-    }
+    return res.isNotEmpty
+      ? res.map((s) => MovimientosModel.fromJson(s)).toList().first
+      : MovimientosModel(categoria: '', cuenta: '', fecha: '', descripcion: '', valor: 0.0);
+  }
 
   Future<int> updateDato(MovimientosModel nuevoDato) async {
     final db = await database;
@@ -136,6 +136,18 @@ class DBProvider {
 
     return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
   }
+
+  // Future bool isExpense(CuentaModel cuenta) async {
+  //   final db = await database;
+  //   final res = await db!.rawQuery('''
+  //     SELECT C.tipoCategoria
+  //     FROM categorias C
+  //     INNER JOIN transacciones T 
+  //     ON C.nombreCategoria = T.categoria AND C.tipoCategoria ='Gasto'
+  //   ''');
+
+  //   return res;
+  // }
 
   Future<CuentaModel> getCuentaById(int id) async {
     final db = await database;
