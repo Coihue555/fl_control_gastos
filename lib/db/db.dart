@@ -137,13 +137,15 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
   }
 
-  // Future bool isExpense(CuentaModel cuenta) async {
+  // Future bool isExpense(MovimientosModel nuevoDato) async {
+  //   final categoria = nuevoDato.categoria;
+
   //   final db = await database;
   //   final res = await db!.rawQuery('''
   //     SELECT C.tipoCategoria
   //     FROM categorias C
   //     INNER JOIN transacciones T 
-  //     ON C.nombreCategoria = T.categoria AND C.tipoCategoria ='Gasto'
+  //     ON C.nombreCategoria = T.categoria AND C.tipoCategoria ='$categoria'
   //   ''');
 
   //   return res;
