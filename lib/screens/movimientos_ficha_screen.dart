@@ -108,14 +108,15 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                               builder: (context, state) {
                                 if (state.lista.isNotEmpty) {
                                   return DropdownButton<String>(
-                                    value: dropdownCategoria,
                                     dropdownColor: const Color.fromARGB(221, 35, 23, 37),
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 10,
                                     style: const TextStyle(fontSize: 25, ),
                                     onChanged: (String? newValue) {
                                       dropdownCategoria = newValue!;
+                                      
                                     },
+                                    value: dropdownCategoria,
                                     items: state.lista
                                     .map<DropdownMenuItem<String>>((CategoriaModel value) {
                                       return DropdownMenuItem<String>(
@@ -149,6 +150,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                 style: const TextStyle(fontSize: 25,),
                                 onChanged: (String? newValue) {
                                   dropdownCuenta = newValue!;
+                                  
                                 },
                                 items: state.lista
                                   .map<DropdownMenuItem<String>>((CuentaModel value) {

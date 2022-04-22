@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fl_control_gastos/widgets/theme.dart';
+import 'package:fl_control_gastos/widgets/widgets.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({

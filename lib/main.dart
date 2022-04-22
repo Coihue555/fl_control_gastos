@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/screens/screens.dart';
-import 'package:fl_control_gastos/widgets/theme.dart';
+import 'package:fl_control_gastos/widgets/widgets.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
 void main() => runApp(MyApp());
