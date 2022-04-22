@@ -23,7 +23,7 @@ class DBProvider {
 
   Future<dynamic> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'conga15DB.db');
+    final path = join(documentsDirectory.path, 'conga16DB.db');
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
@@ -56,6 +56,18 @@ class DBProvider {
             tipoCategoria TEXT
           )
         ''');
+
+        await db.execute(
+          '''
+          INSERT INTO cuentas(nombreCuenta) VALUES ('Efectivo')
+          '''
+        );
+
+        await db.execute(
+          '''
+          INSERT INTO categorias (nombreCategoria, tipoCategoria) VALUES ('Comida', 'Gasto')
+          '''
+        );
     });
   }
 

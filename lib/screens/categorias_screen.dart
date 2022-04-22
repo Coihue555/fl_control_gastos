@@ -38,7 +38,6 @@ class CategoriasScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if (state.lista.isNotEmpty) {
               return ListView.builder(
                     itemCount: state.lista.length,
                     itemBuilder: (context, i) => Dismissible(
@@ -79,11 +78,6 @@ class CategoriasScreen extends StatelessWidget {
                       ),
                     ),
                   );
-            } else {
-              return const Center(
-                  child: Text('Aun no hay Categorias cargadas'),
-                );
-            }
           },
         ),
 

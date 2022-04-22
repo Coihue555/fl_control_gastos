@@ -73,7 +73,7 @@ class CuentasScreen extends StatelessWidget {
                   
             } else {
               return const Center(
-                  child: Text('Aun no hay Cuentas cargadas'),
+                  child: Text('Crea tu primer cuenta con el boton +'),
                 );
             }
           },

@@ -64,10 +64,10 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             child: TextField(
                               style: const TextStyle(fontSize: 20,),
                               controller: dateinput,
-                              decoration: const InputDecoration( 
-                                icon: Icon(Icons.calendar_today),
-                                labelStyle: TextStyle(color: Colors.white),
-                                labelText: "Elija fecha"
+                              decoration: InputDecoration( 
+                                icon: const Icon(Icons.calendar_today),
+                                labelStyle: const TextStyle(color: Colors.white),
+                                labelText: (state.movimiento.fecha == '') ? "Elija fecha" : state.movimiento.fecha 
                               ),
                               readOnly: true,
                               onTap: () async {
@@ -143,8 +143,11 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                     }).toList(),
                                 );
                               } else {
-                                return const Center(
-                                    child: Text('Aun no hay Categorias creadas'),
+                                return Center(
+                                    child: ElevatedButton(onPressed: (){
+                                      Navigator.pushNamed(context, 'Categorias');
+                                    }, child: const Text('Aun no hay Categorias creadas'),),
+                                    
                                   );
                               }
                             },
@@ -157,8 +160,6 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             listenWhen: (previous, current) => !current.isWorking,
                             listener: (context, state) {  },
                             builder: (context, state) {
-
-                              if (state.lista.isNotEmpty) {
                                 return DropdownButton<String>(
                                   value: dropdownCuenta,
                                   dropdownColor: Colors.black87,
@@ -177,11 +178,6 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                       );
                                     }).toList(),
                                 );
-                              } else {
-                                return const Center(
-                                    child: Text('Aun no hay Cuentas creadas'),
-                                  );
-                              }
                             },
                           )
                         ],
