@@ -39,6 +39,7 @@ class CategoriasScreen extends StatelessWidget {
           },
           builder: (context, state) {
               return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: state.lista.length,
                     itemBuilder: (context, i) => Dismissible(
                       key: UniqueKey(),

@@ -10,6 +10,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.black38,
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(

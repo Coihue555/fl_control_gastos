@@ -40,6 +40,7 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.lista.isNotEmpty) {
               return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: state.lista.length,
                     itemBuilder: (context, i) => Dismissible(
                       key: UniqueKey(),
