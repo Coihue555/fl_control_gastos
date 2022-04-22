@@ -21,64 +21,80 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
           Navigator.pushNamed(context, 'Categorias');
         }
       },
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Categorias'),
-          ),
-          body: SingleChildScrollView(
-              child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: BlocBuilder<CategoriasBloc, CategoriasState>(
-                    builder: (context, state) {
-                      return Form(
-                                child: Column(
-                                  children: [
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: 'Nombre de la categoria',
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.purple, Colors.orange]
+          )
+        ),
+        child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              title: const Text('Categorias'),
+            ),
+            body: SingleChildScrollView(
+                child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: BlocBuilder<CategoriasBloc, CategoriasState>(
+                      builder: (context, state) {
+                        return Form(
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        decoration: const InputDecoration(
+                                          labelStyle: TextStyle(color: Colors.white),
+                                          labelText: 'Nombre de la categoria',
+                                        ),
+                                        initialValue: state.categoria.nombreCategoria,
+                                        onChanged: (value) {
+                                          nombreCategoria = value;
+                                        },
                                       ),
-                                      initialValue: state.categoria.nombreCategoria,
-                                      onChanged: (value) {
-                                        nombreCategoria = value;
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: 'Tipo de categoria',
+                                      const SizedBox(
+                                        height: 10,
                                       ),
-                                      initialValue: state.categoria.tipoCategoria,
-                                      onChanged: (value) {
-                                        tipoCategoria = value;
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    
-                                    ElevatedButton(
-                                        child: const SizedBox(
-                                            width: double.infinity,
-                                            child: Center(child: Text('Guardar'))),
-                                        onPressed: () {
-                                          if(nombreCategoria.isEmpty){nombreCategoria = state.categoria.nombreCategoria;}
-                                          if(tipoCategoria.isEmpty){tipoCategoria = state.categoria.tipoCategoria;}
-                                          
-                                          context
-                                              .read<CategoriasBloc>()
-                                              .add(ValidateCategoria(nombreCategoria, tipoCategoria));
-                                        }),
-                                  ],
-                                ),
-                              );
-                    },
+                                      TextFormField(
+                                        decoration: const InputDecoration(
+                                          labelStyle: TextStyle(color: Colors.white),
+                                          labelText: 'Tipo de categoria',
+                                        ),
+                                        initialValue: state.categoria.tipoCategoria,
+                                        onChanged: (value) {
+                                          tipoCategoria = value;
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      
+                                      ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+                                          ),
+                                          child: const SizedBox(
+                                              width: double.infinity,
+                                              child: Center(child: Text('Guardar'))),
+                                          onPressed: () {
+                                            if(nombreCategoria.isEmpty){nombreCategoria = state.categoria.nombreCategoria;}
+                                            if(tipoCategoria.isEmpty){tipoCategoria = state.categoria.tipoCategoria;}
+                                            
+                                            context
+                                                .read<CategoriasBloc>()
+                                                .add(ValidateCategoria(nombreCategoria, tipoCategoria));
+                                          }),
+                                    ],
+                                  ),
+                                );
+                      },
+                    )
                   )
-                )
-            )
-          ),
+              )
+            ),
+      ),
     );
   }
 }

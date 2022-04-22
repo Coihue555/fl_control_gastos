@@ -20,6 +20,17 @@ class MyApp extends StatelessWidget {
         context.read<CategoriasBloc>().add(GetCategoriaList());
 
         return MaterialApp(
+            theme: ThemeData.light().copyWith(
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.deepPurple,
+                primaryColorDark: Colors.red,
+                accentColor: Colors.red,
+              ),
+              scaffoldBackgroundColor: Colors.transparent,
+              textTheme: const TextTheme(bodyText1: TextStyle(color: Colors.white),),
+              primaryColor: Colors.deepPurple,
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.deepPurple)
+            ),
             debugShowCheckedModeBanner: false,
             title: 'Movimientos',
             initialRoute: 'Home',
