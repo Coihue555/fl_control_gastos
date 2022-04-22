@@ -21,14 +21,15 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
     dateinput.text = "";
     super.initState();
   }
+    String dropdownCuenta = 'Efectivo';
+    String dropdownCategoria = 'Comida';
 
   @override
   Widget build(BuildContext context) {
     String spCategoria = '';
     String spDescripcion = '';
     double spValor = 0.0;
-    String dropdownCuenta = 'Efectivo';
-    String dropdownCategoria = 'Comida';
+
 
     return BlocListener<MovimientosBloc, MovimientosState>(
       listenWhen: (previous, current) => !current.isWorking,
@@ -112,11 +113,13 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 10,
                                     style: const TextStyle(fontSize: 25, ),
+                                    value: dropdownCategoria,
                                     onChanged: (String? newValue) {
                                       dropdownCategoria = newValue!;
-                                      
+                                      setState(() {
+                                        dropdownCategoria;
+                                      });
                                     },
-                                    value: dropdownCategoria,
                                     items: state.lista
                                     .map<DropdownMenuItem<String>>((CategoriaModel value) {
                                       return DropdownMenuItem<String>(
@@ -150,6 +153,9 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                 style: const TextStyle(fontSize: 25,),
                                 onChanged: (String? newValue) {
                                   dropdownCuenta = newValue!;
+                                  setState(() {
+                                    dropdownCuenta;
+                                  });
                                   
                                 },
                                 items: state.lista
