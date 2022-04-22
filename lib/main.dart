@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/screens/screens.dart';
+import 'package:fl_control_gastos/widgets/theme.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
 void main() => runApp(MyApp());
@@ -20,17 +21,7 @@ class MyApp extends StatelessWidget {
         context.read<CategoriasBloc>().add(GetCategoriaList());
 
         return MaterialApp(
-            theme: ThemeData.light().copyWith(
-              colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.deepPurple,
-                primaryColorDark: Colors.red,
-                accentColor: Colors.red,
-              ),
-              scaffoldBackgroundColor: Colors.transparent,
-              textTheme: const TextTheme(bodyText1: TextStyle(color: Colors.white),),
-              primaryColor: Colors.deepPurple,
-              floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.deepPurple)
-            ),
+            theme: themePropio(),
             debugShowCheckedModeBanner: false,
             title: 'Movimientos',
             initialRoute: 'Home',

@@ -10,20 +10,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.purple, Colors.orange]
-          )
-        ),
+      decoration: gradientePropia(),
       child: Scaffold(
         drawer: const CustomDrawer(),
-        appBar: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          title: const Text('Movimientos'),
-        ),
+        appBar: const AppBarPropio(title: 'Movimientos',),
         body: BlocConsumer<MovimientosBloc, MovimientosState>(
           listenWhen: (previous, current) => !current.isWorking,
           listener: (context, state) {
@@ -40,69 +30,68 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.lista.isNotEmpty) {
               return ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.lista.length,
-                    itemBuilder: (context, i) => Dismissible(
-                      key: UniqueKey(),
-                      background: Container(
-                                  color: Colors.red,
-                                ),
-                      onDismissed: (DismissDirection direction) {
-                                  context.read<MovimientosBloc>().add(DeleteMovimiento(state.lista[i].id!));
-                                  final snackBar = SnackBar(
-                                      content: const Text('Registro eliminado'),
-                                      action: SnackBarAction(
-                                        label: 'Entendido',
-                                        onPressed: () {  },
-                                      ),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                },
-                      child: FadeIn(
-                        duration: const Duration(seconds: 2),
-                        child: ListTile(
-                                  contentPadding: const EdgeInsets.only(left: 25, right: 15),
-                                  //leading: const Icon(Icons.attach_money_outlined, color: Colors.white),
-                                  title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
-                                  subtitle: Text(state.lista[i].fecha),
-                                  trailing: Container(
-                                    width: 150,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Text('\$' +state.lista[i].valor.toString(),
-                                              style: TextStyle(
-                                                color:Colors.green[300], 
-                                                fontWeight: FontWeight.bold, 
-                                                fontSize: 15),
-                                            ),
-                                            Text(state.lista[i].cuenta),
-                                          ],
-                                        ),
-                                        const SizedBox(width: 5,),
-                                        const Icon(Icons.chevron_right, color: Colors.white,),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    context.read<MovimientosBloc>().add(UpdateMovimiento(state.lista[i].id!));
-                                  }
-                                ),
+                physics: const BouncingScrollPhysics(),
+                itemCount: state.lista.length,
+                itemBuilder: (context, i) => Dismissible(
+                  key: UniqueKey(),
+                  background: Container(
+                    color: Colors.red,
+                  ),
+                  onDismissed: (DismissDirection direction) {
+                    context.read<MovimientosBloc>().add(DeleteMovimiento(state.lista[i].id!));
+                    final snackBar = SnackBar(
+                      content: const Text('Registro eliminado'),
+                      action: SnackBarAction(
+                        label: 'Entendido',
+                        onPressed: () {  },
                       ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  child: FadeIn(
+                    duration: const Duration(seconds: 2),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.only(left: 25, right: 15),
+                      title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
+                      subtitle: Text(state.lista[i].fecha),
+                      trailing: Container(
+                        width: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text('\$' +state.lista[i].valor.toString(),
+                                  style: TextStyle(
+                                    color:Colors.green[300], 
+                                    fontWeight: FontWeight.bold, 
+                                    fontSize: 15
+                                  ),
+                                ),
+                                Text(state.lista[i].cuenta),
+                              ],
+                            ),
+                            const SizedBox(width: 5,),
+                            const Icon(Icons.chevron_right, color: Colors.white,),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        context.read<MovimientosBloc>().add(UpdateMovimiento(state.lista[i].id!));
+                      }
                     ),
-                  );
+                  ),
+                ),
+              );
             } else {
               return const Center(
-                  child: Text('Aun no hay Movimientos cargados'),
-                );
+                child: Text('Aun no hay Movimientos cargados'),
+              );
             }
           },
         ),
-
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {

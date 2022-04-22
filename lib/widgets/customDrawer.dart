@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_control_gastos/widgets/theme.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -14,15 +15,8 @@ class CustomDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.black12,
-              ),
-              child: Column(
-                  children: const [
-                    Text('Control de Gastos', style: TextStyle(fontSize: 30, color: Colors.white)),
-                    Icon(Icons.account_balance_wallet_outlined, size: 100, color: Colors.white,)
-                  ],
-              ),
+              decoration: gradientePropia(),
+              child: const Icon(Icons.account_balance_wallet_outlined, size: 100, color: Colors.white,),
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.white,),

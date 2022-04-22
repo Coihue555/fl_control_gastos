@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
+import 'package:fl_control_gastos/widgets/widgets.dart';
 
 class CuentaFichaScreen extends StatefulWidget {
   @override
@@ -21,64 +22,51 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
         }
       },
       child: Container(
-         decoration: const BoxDecoration(
-           gradient: LinearGradient(
-               begin: Alignment.topLeft,
-               end: Alignment.bottomRight,
-               colors: [Colors.purple, Colors.orange]
-           )
-         ),
+        decoration: gradientePropia(),
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              title: const Text('Cuentas'),
-            ),
-            body: SingleChildScrollView(
-                child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: BlocBuilder<CuentasBloc, CuentasState>(
-                      builder: (context, state) {
-                        return Form(
-                                  child: Column(
-                                    children: [
-                                      TextFormField(
-                                        decoration: const InputDecoration(
-                                          labelStyle: TextStyle(color: Colors.white),
-                                          labelText: 'Nombre de la Cuenta',
-                                        ),
-                                        initialValue: state.cuenta.nombreCuenta,
-                                        onChanged: (value) {
-                                          nombreCuenta = value;
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      
-                                      ElevatedButton(
-                                        style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-                                          ),
-                                          child: const SizedBox(
-                                              width: double.infinity,
-                                              child: Center(child: Text('Guardar'))),
-                                          onPressed: () {
-                                            if(nombreCuenta.isEmpty){nombreCuenta = state.cuenta.nombreCuenta;}
-                                            
-                                            context
-                                                .read<CuentasBloc>()
-                                                .add(ValidateCuenta(nombreCuenta));
-                                          }),
-                                    ],
-                                  ),
-                                );
-                      },
-                    )
-                  )
+          appBar: const AppBarPropio(title: 'Nueva cuenta'),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: BlocBuilder<CuentasBloc, CuentasState>(
+                  builder: (context, state) {
+                    return Form(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelStyle: TextStyle(color: Colors.white),
+                              labelText: 'Nombre de la Cuenta',
+                            ),
+                            initialValue: state.cuenta.nombreCuenta,
+                            onChanged: (value) {
+                              nombreCuenta = value;
+                            },
+                          ),
+                          const SizedBox(height: 10,),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+                            ),
+                            child: const SizedBox(
+                              width: double.infinity,
+                              child: Center(child: Text('Guardar'))
+                            ),
+                            onPressed: () {
+                              if(nombreCuenta.isEmpty){nombreCuenta = state.cuenta.nombreCuenta;}
+                              context
+                                .read<CuentasBloc>()
+                                .add(ValidateCuenta(nombreCuenta));
+                            }
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                )
               )
-            ),
+            )
+          ),
       ),
     );
   }
