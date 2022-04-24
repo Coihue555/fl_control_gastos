@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 
@@ -48,40 +47,37 @@ class HomeScreen extends StatelessWidget {
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
-                  child: FadeIn(
-                    duration: const Duration(seconds: 2),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.only(left: 25, right: 15),
-                      title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
-                      subtitle: Text(state.lista[i].fecha),
-                      trailing: Container(
-                        width: 150,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text('\$' +state.lista[i].valor.toString(),
-                                  style: TextStyle(
-                                    color:Colors.green[300], 
-                                    fontWeight: FontWeight.bold, 
-                                    fontSize: 15
-                                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.only(left: 25, right: 15),
+                    title: Text(state.lista[i].categoria + ' - ' + state.lista[i].descripcion),
+                    subtitle: Text(state.lista[i].fecha),
+                    trailing: Container(
+                      width: 150,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text('\$' +state.lista[i].valor.toString(),
+                                style: TextStyle(
+                                  color:Colors.green[300], 
+                                  fontWeight: FontWeight.bold, 
+                                  fontSize: 15
                                 ),
-                                Text(state.lista[i].cuenta),
-                              ],
-                            ),
-                            const SizedBox(width: 5,),
-                            const Icon(Icons.chevron_right, color: Colors.white,),
-                          ],
-                        ),
+                              ),
+                              Text(state.lista[i].cuenta),
+                            ],
+                          ),
+                          const SizedBox(width: 5,),
+                          const Icon(Icons.chevron_right, color: Colors.white,),
+                        ],
                       ),
-                      onTap: () {
-                        context.read<MovimientosBloc>().add(UpdateMovimiento(state.lista[i].id!));
-                      }
                     ),
+                    onTap: () {
+                      context.read<MovimientosBloc>().add(UpdateMovimiento(state.lista[i].id!));
+                    }
                   ),
                 ),
               );

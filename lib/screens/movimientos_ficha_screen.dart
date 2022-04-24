@@ -52,57 +52,6 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                       children: [
                         Row(
                           children: [
-                            Expanded(
-                              child: TextField(
-                                style: const TextStyle(fontSize: 20,),
-                                controller: dateinput,
-                                decoration: InputDecoration( 
-                                  icon: const Icon(Icons.calendar_today),
-                                  labelStyle: const TextStyle(color: Colors.white),
-                                  labelText: (state.movimiento.fecha == '') ? "Elija fecha" : state.movimiento.fecha 
-                                ),
-                                readOnly: true,
-                                onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: (state.movimiento.fecha == '' ) ? DateTime.now() : DateTime.parse(state.movimiento.fecha),
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2030)
-                                  );
-                                  if(pickedDate != null ){
-                                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                      setState(() {
-                                        dateinput.text = formattedDate;
-                                      });
-                                  }else{
-                                      print('No se eligio fecha');
-                                  }
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 10,),
-                            Expanded(
-                              child: TextFormField(
-                                style: const TextStyle(fontSize: 20,),
-                                decoration: const InputDecoration(
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  labelText: 'Valor',
-                                ),
-                                initialValue: state.movimiento.valor.toString(),
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
-                                ],
-                                onChanged: (value) {
-                                  spValor = double.tryParse(value) ?? 0;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20,),
-                        Row(
-                          children: [
                             BlocConsumer<CategoriasBloc, CategoriasState>(
                               listenWhen: (previous, current) => !current.isWorking,
                               listener: (context, state) {  },
@@ -170,6 +119,58 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             )
                           ],
                         ),
+                        const SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                style: const TextStyle(fontSize: 20,),
+                                controller: dateinput,
+                                decoration: InputDecoration( 
+                                  icon: const Icon(Icons.calendar_today),
+                                  labelStyle: const TextStyle(color: Colors.white),
+                                  labelText: (state.movimiento.fecha == '') ? "Elija fecha" : state.movimiento.fecha 
+                                ),
+                                readOnly: true,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: (state.movimiento.fecha == '' ) ? DateTime.now() : DateTime.parse(state.movimiento.fecha),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2030)
+                                  );
+                                  if(pickedDate != null ){
+                                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                      setState(() {
+                                        dateinput.text = formattedDate;
+                                      });
+                                  }else{
+                                      print('No se eligio fecha');
+                                  }
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 10,),
+                            Expanded(
+                              child: TextFormField(
+                                style: const TextStyle(fontSize: 20,),
+                                decoration: const InputDecoration(
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  labelText: 'Valor',
+                                ),
+                                initialValue: state.movimiento.valor.toString(),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
+                                ],
+                                onChanged: (value) {
+                                  spValor = double.tryParse(value) ?? 0;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        
                         const SizedBox( height: 10, ),
                         TextFormField(
                           style: const TextStyle(fontSize: 25,),

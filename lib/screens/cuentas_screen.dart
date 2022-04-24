@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -48,16 +47,12 @@ class CuentasScreen extends StatelessWidget {
                     );
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
-                  child: FadeIn(
-                    duration: const Duration(seconds: 2),
-                    child: ListTile(
-                      //leading: const Icon(Icons.attach_money_outlined, color: Colors.blue),
-                      title: Text(state.lista[i].nombreCuenta),
-                      trailing: const Icon(Icons.chevron_right, color: Colors.white,),
-                      onTap: () {
-                        context.read<CuentasBloc>().add(UpdateCuenta(state.lista[i].id!));
-                      }
-                    ),
+                  child: ListTile(
+                    title: Text(state.lista[i].nombreCuenta),
+                    trailing: const Icon(Icons.chevron_right, color: Colors.white,),
+                    onTap: () {
+                      context.read<CuentasBloc>().add(UpdateCuenta(state.lista[i].id!));
+                    }
                   ),
                 ),
               );

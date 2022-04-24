@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
@@ -47,25 +46,21 @@ class CategoriasScreen extends StatelessWidget {
                   );
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
-                child: FadeIn(
-                  duration: const Duration(seconds: 2),
-                  child: ListTile(
-                    //leading: const Icon(Icons.calculate, color: Colors.blue),
-                    title: Text(state.lista[i].nombreCategoria),
-                    subtitle: Text(state.lista[i].tipoCategoria,),
-                    trailing: Container(
-                      width: 150,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Icon(Icons.chevron_right, color: Colors.white),
-                        ],
-                      ),
+                child: ListTile(
+                  title: Text(state.lista[i].nombreCategoria),
+                  subtitle: Text(state.lista[i].tipoCategoria,),
+                  trailing: Container(
+                    width: 150,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: const [
+                        Icon(Icons.chevron_right, color: Colors.white),
+                      ],
                     ),
-                    onTap: () {
-                      context.read<CategoriasBloc>().add(UpdateCategoria(state.lista[i].id!));
-                    }
                   ),
+                  onTap: () {
+                    context.read<CategoriasBloc>().add(UpdateCategoria(state.lista[i].id!));
+                  }
                 ),
               ),
             );
