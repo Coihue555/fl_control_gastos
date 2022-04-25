@@ -12,11 +12,8 @@ class HomeScreen extends StatelessWidget {
       decoration: gradientePropia(),
       child: Scaffold(
         drawer: const CustomDrawerWidget(),
-        appBar: const CustomAppBarWidget(
-          title: 'Movimientos',
-        ),
-        
-        body: const MovScreenWidget(),
+        appBar: const CustomAppBarWidget( title: 'Movimientos',  ),
+        body: const MovBodyWidget(),
 
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),

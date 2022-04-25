@@ -1,7 +1,7 @@
-import 'package:fl_control_gastos/bloc/blocs.dart';
-import 'package:fl_control_gastos/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fl_control_gastos/bloc/blocs.dart';
+import 'package:fl_control_gastos/models/models.dart';
 
 class CategoriasBodyWidget extends StatelessWidget {
   const CategoriasBodyWidget({
@@ -14,7 +14,7 @@ class CategoriasBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-          Navigator.pushReplacementNamed(context, 'CategoriasFicha');
+          Navigator.pushNamed(context, 'CategoriasFicha');
         }
         if (state.error.isNotEmpty) {
           print(state.error);

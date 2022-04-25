@@ -14,6 +14,7 @@ class CuentasScreen extends StatelessWidget {
         drawer: const CustomDrawerWidget(),
         appBar: const CustomAppBarWidget(title: 'Cuentas',),
         body: CuentasBodyWidget(),
+        
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
@@ -36,7 +37,7 @@ class CuentasBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'NewCuenta' || state.accion == 'UpdateCuenta') {
-          Navigator.pushReplacementNamed(context, 'CuentasFicha');
+          Navigator.pushNamed(context, 'CuentasFicha');
         }
         if (state.error.isNotEmpty) {
           print(state.error);

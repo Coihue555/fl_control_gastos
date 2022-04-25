@@ -14,6 +14,8 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
     on<ValidateCategoria>(_validateCategoria);
     on<DeleteCategoria>(_deleteCategoria);
   }
+
+  
   Future<void> _guardarCategoria(GuardarCategoria event, Emitter emit) async {
     emit(state.copyWith( isWorking: true, error: '', accion: 'GuardarCategoria', ));
 

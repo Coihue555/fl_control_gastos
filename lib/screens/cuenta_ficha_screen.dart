@@ -10,15 +10,17 @@ class CuentaFichaScreen extends StatefulWidget {
 }
 
 class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
+  
+  String nombreCuenta = '';
+
   @override
   Widget build(BuildContext context) {
-    String nombreCuenta = '';
 
     return BlocListener<CuentasBloc, CuentasState>(
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
-          Navigator.pushReplacementNamed(context, 'Cuentas');
+          Navigator.pushNamed(context, 'Cuentas');
         }
       },
       child: Container(
@@ -33,32 +35,9 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
                     return Form(
                       child: Column(
                         children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelStyle: TextStyle(color: Colors.white),
-                              labelText: 'Nombre de la Cuenta',
-                            ),
-                            initialValue: state.cuenta.nombreCuenta,
-                            onChanged: (value) {
-                              nombreCuenta = value;
-                            },
-                          ),
+                          campoNomCuentaFichaWidget(state),
                           const SizedBox(height: 10,),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-                            ),
-                            child: const SizedBox(
-                              width: double.infinity,
-                              child: Center(child: Text('Guardar'))
-                            ),
-                            onPressed: () {
-                              if(nombreCuenta.isEmpty){nombreCuenta = state.cuenta.nombreCuenta;}
-                              context
-                                .read<CuentasBloc>()
-                                .add(ValidateCuenta(nombreCuenta));
-                            }
-                          ),
+                          btnGuardarCuentaFichaWidget(nombreCuenta, state, context),
                         ],
                       ),
                     );
@@ -68,6 +47,40 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
             )
           ),
       ),
+    );
+  }
+
+  TextFormField campoNomCuentaFichaWidget(CuentasState state) {
+    return TextFormField(
+        decoration: const InputDecoration(
+          labelStyle: TextStyle(color: Colors.white),
+          labelText: 'Nombre de la Cuenta',
+        ),
+        initialValue: state.cuenta.nombreCuenta,
+        onChanged: (value) {
+          nombreCuenta = value;
+          setState(() {
+            nombreCuenta;
+          });
+        },
+      );
+  }
+
+  ElevatedButton btnGuardarCuentaFichaWidget(String nombreCuenta, CuentasState state, BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+      ),
+      child: const SizedBox(
+        width: double.infinity,
+        child: Center(child: Text('Guardar'))
+      ),
+      onPressed: () {
+        if(nombreCuenta.isEmpty){nombreCuenta = state.cuenta.nombreCuenta;}
+        context
+          .read<CuentasBloc>()
+          .add(ValidateCuenta(nombreCuenta));
+      }
     );
   }
 }

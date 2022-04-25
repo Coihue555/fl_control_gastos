@@ -11,18 +11,17 @@ class CategoriasFichaScreen extends StatefulWidget {
 
 class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
+  String nombreCategoria = '';
+  String tipoCategoria = '';
 
   @override
   Widget build(BuildContext context) {
     
-  String nombreCategoria = '';
-  String tipoCategoria = '';
-
     return BlocListener<CategoriasBloc, CategoriasState>(
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
-          Navigator.pushReplacementNamed(context, 'Categorias');
+          Navigator.pushNamed(context, 'Categorias');
         }
       },
       child: Container(
@@ -37,47 +36,11 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                   return Form(
                     child: Column(
                       children: [
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelStyle: TextStyle(color: Colors.white),
-                            labelText: 'Nombre de la categoria',
-                          ),
-                          initialValue: state.categoria.nombreCategoria,
-                          onChanged: (value) {
-                            nombreCategoria = value;
-                            
-                          },
-                        ),
+                        CampoNombreCatFichaWidget(state),
                         const SizedBox(height: 10,),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelStyle: TextStyle(color: Colors.white),
-                            labelText: 'Tipo de categoria',
-                          ),
-                          initialValue: state.categoria.tipoCategoria,
-                          onChanged: (value) {
-                            tipoCategoria = value;
-                            
-                          },
-                        ),
+                        CampoTipoCatFichaWidget(state),
                         const SizedBox(height: 10,),
-                        ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-                        ),
-                        child: const SizedBox(
-                          width: double.infinity,
-                          child: Center(child: Text('Guardar'))
-                        ),
-                        onPressed: () {
-                          if(nombreCategoria.isEmpty){nombreCategoria = state.categoria.nombreCategoria;}
-                          if(tipoCategoria.isEmpty){tipoCategoria = state.categoria.tipoCategoria;}
-                          
-                          context
-                              .read<CategoriasBloc>()
-                              .add(ValidateCategoria(nombreCategoria, tipoCategoria));
-                        }
-                      )
+                        BtnGuardarCatFicha(nombreCategoria: nombreCategoria, tipoCategoria: tipoCategoria)
                       ],
                     ),
                   );
@@ -89,5 +52,72 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
       ),
     );
   }
+
+
+
+
+  TextFormField CampoNombreCatFichaWidget(CategoriasState state) {
+    return TextFormField(
+      decoration: const InputDecoration(
+        labelStyle: TextStyle(color: Colors.white),
+        labelText: 'Nombre de la categoria',
+      ),
+      initialValue: state.categoria.nombreCategoria,
+      onChanged: (value) {
+        nombreCategoria = value;
+        setState(() {
+          nombreCategoria;
+        });
+        
+      },
+    );
+  }
+
+  TextFormField CampoTipoCatFichaWidget(CategoriasState state) {
+    return TextFormField(
+      decoration: const InputDecoration(
+        labelStyle: TextStyle(color: Colors.white),
+        labelText: 'Tipo de categoria',
+      ),
+      initialValue: state.categoria.tipoCategoria,
+      onChanged: (value) {
+        tipoCategoria = value;
+        setState(() {
+          tipoCategoria;
+        });
+        
+      },
+    );
+  }
   
+}
+
+class BtnGuardarCatFicha extends StatelessWidget {
+  const BtnGuardarCatFicha({
+    Key? key,
+    required this.nombreCategoria,
+    required this.tipoCategoria,
+  }) : super(key: key);
+
+  final String nombreCategoria;
+  final String tipoCategoria;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+      ),
+      child: const SizedBox(
+        width: double.infinity,
+        child: Center(child: Text('Guardar'))
+      ),
+      onPressed: () {
+                        
+        context
+            .read<CategoriasBloc>()
+            .add(ValidateCategoria(nombreCategoria, tipoCategoria));
+      }
+    );
+  }
 }

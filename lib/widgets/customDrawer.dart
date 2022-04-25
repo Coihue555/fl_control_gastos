@@ -22,7 +22,7 @@ class CustomDrawerWidget extends StatelessWidget {
               leading: const Icon(Icons.home, color: Colors.white,),
               title: const Text('Inicio', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
               onTap: () {
-                Navigator.pushReplacementNamed(context, 'Home');
+                Navigator.pushNamed(context, 'Home');
               },
             ),
             ListTile(
@@ -30,14 +30,14 @@ class CustomDrawerWidget extends StatelessWidget {
               leading: const Icon(Icons.account_balance_wallet, color: Colors.white,),
               title: const Text('Cuentas', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
               onTap: () {
-                Navigator.pushReplacementNamed(context, 'Cuentas');
+                Navigator.pushNamed(context, 'Cuentas');
               },
             ),
             ListTile(
               leading: const Icon(Icons.list, color: Colors.white,),
               title: const Text('Categorias', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
               onTap: () {
-                Navigator.pushReplacementNamed(context, 'Categorias');
+                Navigator.pushNamed(context, 'Categorias');
               },
             ),
             

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 
-class MovScreenWidget extends StatelessWidget {
-  const MovScreenWidget({
+class MovBodyWidget extends StatelessWidget {
+  const MovBodyWidget({
     Key? key,
   }) : super(key: key);
 
