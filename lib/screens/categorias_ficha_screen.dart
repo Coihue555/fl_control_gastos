@@ -10,10 +10,13 @@ class CategoriasFichaScreen extends StatefulWidget {
 }
 
 class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
+
+
   @override
   Widget build(BuildContext context) {
-    String nombreCategoria = '';
-    String tipoCategoria = '';
+    
+  String nombreCategoria = '';
+  String tipoCategoria = '';
 
     return BlocListener<CategoriasBloc, CategoriasState>(
       listenWhen: (previous, current) => !current.isWorking,
@@ -42,6 +45,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                           initialValue: state.categoria.nombreCategoria,
                           onChanged: (value) {
                             nombreCategoria = value;
+                            
                           },
                         ),
                         const SizedBox(height: 10,),
@@ -53,26 +57,11 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                           initialValue: state.categoria.tipoCategoria,
                           onChanged: (value) {
                             tipoCategoria = value;
+                            
                           },
                         ),
                         const SizedBox(height: 10,),
-                        BtnCategoriaFichaWidget(nombreCategoria, state, tipoCategoria, context),
-                      ],
-                    ),
-                  );
-                },
-              )
-            )
-          )
-        ),
-      ),
-    );
-  }
-  
-  
-
-  ElevatedButton BtnCategoriaFichaWidget(String nombreCategoria, CategoriasState state, String tipoCategoria, BuildContext context) {
-    return ElevatedButton(
+                        ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
                         ),
@@ -88,6 +77,17 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                               .read<CategoriasBloc>()
                               .add(ValidateCategoria(nombreCategoria, tipoCategoria));
                         }
-                      );
+                      )
+                      ],
+                    ),
+                  );
+                },
+              )
+            )
+          )
+        ),
+      ),
+    );
   }
+  
 }

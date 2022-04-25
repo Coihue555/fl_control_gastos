@@ -8,7 +8,9 @@ class Listado extends StatelessWidget {
     Key? key,
     required this.lista,
   }) : super(key: key);
+  
   final List<MovimientosModel> lista;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
