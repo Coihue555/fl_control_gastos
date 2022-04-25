@@ -23,12 +23,13 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
   }
     String dropdownCuenta = 'Efectivo';
     String dropdownCategoria = 'Comida';
+    String spDescripcion = '';
+    double spValor = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    String spCategoria = '';
-    String spDescripcion = '';
-    double spValor = 0.0;
+    
+    
 
 
     return BlocListener<MovimientosBloc, MovimientosState>(
@@ -62,7 +63,9 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                     icon: const Icon(Icons.arrow_drop_down),
                                     elevation: 10,
                                     style: const TextStyle(fontSize: 25, ),
-                                    value: dropdownCategoria,
+                                    value: (BlocProvider.of<MovimientosBloc>(context).state.movimiento.categoria == '')
+                                            ? dropdownCategoria
+                                            : BlocProvider.of<MovimientosBloc>(context).state.movimiento.categoria,
                                     onChanged: (String? newValue) {
                                       dropdownCategoria = newValue!;
                                       setState(() {
@@ -95,7 +98,9 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             listener: (context, state) {  },
                             builder: (context, state) {
                               return DropdownButton<String>(
-                                value: dropdownCuenta,
+                                value: (BlocProvider.of<MovimientosBloc>(context).state.movimiento.cuenta == '')
+                                            ? dropdownCuenta
+                                            : BlocProvider.of<MovimientosBloc>(context).state.movimiento.cuenta,
                                 dropdownColor: const Color.fromARGB(221, 35, 23, 37),
                                 icon: const Icon(Icons.arrow_drop_down),
                                 elevation: 10,
@@ -191,11 +196,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             width: double.infinity,
                             child: Center(child: Text('Guardar'))
                           ),
-                          onPressed: () {          
-                            if(spCategoria.isEmpty){spCategoria = state.movimiento.categoria;}
-                            if(spDescripcion.isEmpty){spDescripcion = state.movimiento.descripcion;}
-                            if(spValor == 0.0){spValor = state.movimiento.valor;}
-                            if(dateinput.text.isEmpty){dateinput.text = state.movimiento.fecha;}
+                          onPressed: () {
                             context
                               .read<MovimientosBloc>()
                               .add(ValidateMovimiento(dropdownCategoria, dropdownCuenta, dateinput.text, spDescripcion, spValor));

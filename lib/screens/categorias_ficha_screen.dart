@@ -19,7 +19,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
-          Navigator.pushNamed(context, 'Categorias');
+          Navigator.pushReplacementNamed(context, 'Categorias');
         }
       },
       child: Container(

@@ -17,7 +17,7 @@ class CuentasScreen extends StatelessWidget {
           listenWhen: (previous, current) => !current.isWorking,
           listener: (context, state) {
             if (state.accion == 'NewCuenta' || state.accion == 'UpdateCuenta') {
-              Navigator.pushNamed(context, 'CuentasFicha');
+              Navigator.pushReplacementNamed(context, 'CuentasFicha');
             }
             if (state.error.isNotEmpty) {
               print(state.error);

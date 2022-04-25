@@ -17,7 +17,7 @@ class CategoriasScreen extends StatelessWidget {
           listenWhen: (previous, current) => !current.isWorking,
           listener: (context, state) {
             if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-              Navigator.pushNamed(context, 'CategoriasFicha');
+              Navigator.pushReplacementNamed(context, 'CategoriasFicha');
             }
             if (state.error.isNotEmpty) {
               print(state.error);
