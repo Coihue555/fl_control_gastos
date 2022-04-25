@@ -24,7 +24,7 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
       child: Container(
         decoration: gradientePropia(),
         child: Scaffold(
-          appBar: const AppBarPropio(title: 'Nueva cuenta'),
+          appBar: const CustomAppBarWidget(title: 'Nueva cuenta'),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

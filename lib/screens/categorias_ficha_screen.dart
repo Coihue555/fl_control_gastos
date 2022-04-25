@@ -25,7 +25,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
       child: Container(
         decoration: gradientePropia(),
         child: Scaffold(
-          appBar: const AppBarPropio(title: 'Nueva categoria'),
+          appBar: const CustomAppBarWidget(title: 'Nueva categoria'),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -56,23 +56,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                           },
                         ),
                         const SizedBox(height: 10,),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-                          ),
-                          child: const SizedBox(
-                            width: double.infinity,
-                            child: Center(child: Text('Guardar'))
-                          ),
-                          onPressed: () {
-                            if(nombreCategoria.isEmpty){nombreCategoria = state.categoria.nombreCategoria;}
-                            if(tipoCategoria.isEmpty){tipoCategoria = state.categoria.tipoCategoria;}
-                            
-                            context
-                                .read<CategoriasBloc>()
-                                .add(ValidateCategoria(nombreCategoria, tipoCategoria));
-                          }
-                        ),
+                        BtnCategoriaFichaWidget(nombreCategoria, state, tipoCategoria, context),
                       ],
                     ),
                   );
@@ -83,5 +67,27 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
         ),
       ),
     );
+  }
+  
+  
+
+  ElevatedButton BtnCategoriaFichaWidget(String nombreCategoria, CategoriasState state, String tipoCategoria, BuildContext context) {
+    return ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+                        ),
+                        child: const SizedBox(
+                          width: double.infinity,
+                          child: Center(child: Text('Guardar'))
+                        ),
+                        onPressed: () {
+                          if(nombreCategoria.isEmpty){nombreCategoria = state.categoria.nombreCategoria;}
+                          if(tipoCategoria.isEmpty){tipoCategoria = state.categoria.tipoCategoria;}
+                          
+                          context
+                              .read<CategoriasBloc>()
+                              .add(ValidateCategoria(nombreCategoria, tipoCategoria));
+                        }
+                      );
   }
 }

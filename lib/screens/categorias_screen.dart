@@ -11,61 +11,9 @@ class CategoriasScreen extends StatelessWidget {
     return Container(
       decoration: gradientePropia(),
       child: Scaffold(
-        drawer: const CustomDrawer(),
-        appBar: const AppBarPropio(title: 'Categorias'),
-        body: BlocConsumer<CategoriasBloc, CategoriasState>(
-          listenWhen: (previous, current) => !current.isWorking,
-          listener: (context, state) {
-            if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-              Navigator.pushReplacementNamed(context, 'CategoriasFicha');
-            }
-            if (state.error.isNotEmpty) {
-              print(state.error);
-            }
-            if (state.accion == 'ValidateCategoria' && state.error.isEmpty) {
-              context.read<CategoriasBloc>().add(GuardarCategoria());
-            }
-          },
-          builder: (context, state) {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: state.lista.length,
-              itemBuilder: (context, i) => Dismissible(
-                key: UniqueKey(),
-                background: Container(
-                  color: Colors.red,
-                ),
-                onDismissed: (DismissDirection direction) {
-                  context.read<CategoriasBloc>().add(DeleteCategoria(state.lista[i].id!));
-                  final snackBar = SnackBar(
-                    content: const Text('Registro eliminado'),
-                    action: SnackBarAction(
-                      label: 'Entendido',
-                      onPressed: () {  },
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: ListTile(
-                  title: Text(state.lista[i].nombreCategoria),
-                  subtitle: Text(state.lista[i].tipoCategoria,),
-                  trailing: Container(
-                    width: 150,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Icon(Icons.chevron_right, color: Colors.white),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    context.read<CategoriasBloc>().add(UpdateCategoria(state.lista[i].id!));
-                  }
-                ),
-              ),
-            );
-          },
-        ),
+        drawer: const CustomDrawerWidget(),
+        appBar: const CustomAppBarWidget(title: 'Categorias'),
+        body: const CategoriasBodyWidget(),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {

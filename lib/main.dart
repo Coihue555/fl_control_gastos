@@ -1,12 +1,17 @@
+import 'package:fl_control_gastos/bloc/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/screens/screens.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
-void main() => runApp(MyApp());
+void main() => BlocOverrides.runZoned(() async {
+      runApp(MyApp());
+    }, blocObserver: SimpleBlocObserver());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -26,12 +31,12 @@ class MyApp extends StatelessWidget {
             title: 'Movimientos',
             initialRoute: 'Home',
             routes: {
-              'Home'            : (_) => const HomeScreen(),
+              'Home': (_) => const HomeScreen(),
               'MovimientosFicha': (_) => MovimientosFichaScreen(),
-              'Cuentas'         : (_) => const CuentasScreen(),
-              'CuentasFicha'    : (_) => CuentaFichaScreen(),
-              'Categorias'      : (_) => const CategoriasScreen(),
-              'CategoriasFicha' : (_) => CategoriasFichaScreen(),
+              'Cuentas': (_) => const CuentasScreen(),
+              'CuentasFicha': (_) => CuentaFichaScreen(),
+              'Categorias': (_) => const CategoriasScreen(),
+              'CategoriasFicha': (_) => CategoriasFichaScreen(),
             });
       }),
     );

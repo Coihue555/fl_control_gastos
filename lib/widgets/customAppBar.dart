@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class AppBarPropio extends StatelessWidget implements PreferredSizeWidget{
+class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
   final String title;
 
-  const AppBarPropio({
+  const CustomAppBarWidget({
     required this.title,
   });
 

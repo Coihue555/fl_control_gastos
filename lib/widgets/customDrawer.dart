@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({
+class CustomDrawerWidget extends StatelessWidget {
+  const CustomDrawerWidget({
     Key? key,
   }) : super(key: key);
 
