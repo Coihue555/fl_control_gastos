@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -16,6 +18,10 @@ class MovBodyWidget extends StatelessWidget {
         if (state.accion == 'NewMovimiento' ||
             state.accion == 'UpdateMovimiento') {
           Navigator.pushNamed(context, 'MovimientosFicha');
+        }
+        if (state.accion == 'GuardarMovimiento' && state.error.isEmpty) {
+          Navigator.pop(context);
+          log('ewrwefes');
         }
         if (state.error.isNotEmpty) {
           print(state.error);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
@@ -38,6 +40,7 @@ class CuentasBodyWidget extends StatelessWidget {
       listener: (context, state) {
         if (state.accion == 'NewCuenta' || state.accion == 'UpdateCuenta') {
           Navigator.pushNamed(context, 'CuentasFicha');
+          log('======>Navigator.pushNamed(context, cuentasFicha)');
         }
         if (state.error.isNotEmpty) {
           print(state.error);

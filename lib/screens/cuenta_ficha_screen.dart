@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -21,6 +23,7 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
       listener: (context, state) {
         if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
           Navigator.pushNamed(context, 'Cuentas');
+          log('======>Navigator.pushNamed(context, cuentas)');
         }
       },
       child: Container(

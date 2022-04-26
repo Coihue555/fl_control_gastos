@@ -17,7 +17,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
   }
   Future<void> _guardarMovimiento(GuardarMovimiento event, Emitter emit) async {
     emit(state.copyWith( isWorking: true, error: '', accion: 'GuardarMovimiento', ));
-
+    await Future.delayed(Duration(seconds: 4));
     //Guardar nuevo o Modificacion
    final idMovimiento =( state.movimiento.id == null)
       ?  await DBProvider.db.nuevoDato(state.movimiento)

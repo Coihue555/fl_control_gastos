@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
@@ -13,6 +15,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
   String nombreCategoria = '';
   String tipoCategoria = '';
+  bool esGasto = true;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
       listener: (context, state) {
         if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
           Navigator.pushNamed(context, 'Categorias');
+          log('======>Navigator.pushNamed(context, Categorias)');
         }
       },
       child: Container(
@@ -39,6 +43,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                         CampoNombreCatFichaWidget(state),
                         const SizedBox(height: 10,),
                         CampoTipoCatFichaWidget(state),
+                        //esGastoWidget(),
                         const SizedBox(height: 10,),
                         BtnGuardarCatFicha(nombreCategoria: nombreCategoria, tipoCategoria: tipoCategoria)
                       ],
@@ -50,6 +55,20 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
           )
         ),
       ),
+    );
+  }
+
+  Switch esGastoWidget() {
+    return Switch(
+      value: esGasto,
+      activeColor: Colors.deepPurple,
+      onChanged: (value){
+        esGasto = value;
+        setState(() {
+          esGasto;
+        });
+        print(esGasto);
+      }
     );
   }
 
@@ -74,6 +93,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
   }
 
   TextFormField CampoTipoCatFichaWidget(CategoriasState state) {
+
     return TextFormField(
       decoration: const InputDecoration(
         labelStyle: TextStyle(color: Colors.white),

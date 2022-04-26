@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BtnGuardarMovWidget extends StatelessWidget {
-  const BtnGuardarMovWidget({
+  BtnGuardarMovWidget({
     Key? key,
     required this.dropdownCategoria,
     required this.dropdownCuenta,
@@ -12,11 +12,11 @@ class BtnGuardarMovWidget extends StatelessWidget {
     required this.spValor,
   }) : super(key: key);
 
-  final String dropdownCategoria;
-  final String dropdownCuenta;
-  final TextEditingController dateinput;
-  final String spDescripcion;
-  final double spValor;
+  String dropdownCategoria;
+  String dropdownCuenta;
+  TextEditingController dateinput;
+  String spDescripcion;
+  double spValor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,15 @@ class BtnGuardarMovWidget extends StatelessWidget {
         child: Center(child: Text('Guardar'))
       ),
       onPressed: () {
+        final movState = BlocProvider.of<MovimientosBloc>(context).state.movimiento;
+
+        if(dropdownCategoria.isEmpty) {dropdownCategoria  = movState.categoria;}
+        if(dropdownCuenta.isEmpty)    {dropdownCuenta     = movState.cuenta;}
+        if(dateinput.text.isEmpty)    {dateinput.text     = movState.fecha;}
+        if(spDescripcion.isEmpty)     {spDescripcion      = movState.descripcion;}
+        if(spValor == 0.0)            {spValor            = movState.valor;}
+
+
         context
           .read<MovimientosBloc>()
           .add(ValidateMovimiento(dropdownCategoria, dropdownCuenta, dateinput.text, spDescripcion, spValor));
