@@ -16,8 +16,8 @@ class MovimientosModel {
 
   MovimientosModel copyWith({
     int? id,
-    String categoria = '',
-    String cuenta = '',
+    String categoria = 'Comida',
+    String cuenta = 'Efectivo',
     String fecha ='',
     String? descripcion,
     double? valor

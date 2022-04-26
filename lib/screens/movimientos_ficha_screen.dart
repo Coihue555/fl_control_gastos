@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_print
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -36,12 +34,12 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
       builder: (context, state) {
         return WillPopScope(
           onWillPop: () async {
-            
             return !state.isWorking;
           },
           child: Container(
             decoration: gradientePropia(),
             child: Scaffold(
+                
                 appBar: const CustomAppBarWidget(
                   title: 'Nueva transaccion',
                 ),
@@ -51,16 +49,17 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                             horizontal: 20, vertical: 10),
                         child: BlocBuilder<MovimientosBloc, MovimientosState>(
                           builder: (context, state) {
+                            
                             return Form(
                               child: Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       dropCategoriaMovFichaWidget(),
-                                      Expanded(
-                                          child: Container(
+                                      const SizedBox(
                                         width: 10,
-                                      )),
+                                      ),
                                       dropCuentasMovFicha()
                                     ],
                                   ),
@@ -82,15 +81,19 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                       dropdownCategoria:
                                           dropdownCategoria ?? '',
                                       dropdownCuenta: dropdownCuenta ?? '',
-                                      dateinput: dateinput,
+                                      dateinput: dateinput ,
                                       spDescripcion: spDescripcion,
                                       spValor: spValor)
                                 ],
                               ),
                             );
                           },
-                        )))),
+                        )
+                      )
+                    )
+                ),
           ),
+          
         );
       },
     );
@@ -102,8 +105,9 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
         if (state.lista.isNotEmpty) {
           return DropdownButton<String>(
             dropdownColor: const Color.fromARGB(221, 35, 23, 37),
-            icon: const Icon(Icons.arrow_drop_down),
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.white,),
             elevation: 10,
+            hint: const Text('Categoria', style: TextStyle(color: Colors.white),),
             style: const TextStyle(
               fontSize: 25,
             ),
@@ -161,8 +165,9 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                   .movimiento
                   .cuenta,
           dropdownColor: const Color.fromARGB(221, 35, 23, 37),
-          icon: const Icon(Icons.arrow_drop_down),
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.white,),
           elevation: 10,
+          hint: const Text('Cuenta', style: TextStyle(color: Colors.white),),
           style: const TextStyle(
             fontSize: 25,
           ),
@@ -190,7 +195,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
       ),
       controller: dateinput,
       decoration: InputDecoration(
-          icon: const Icon(Icons.calendar_today),
+          icon: const Icon(Icons.calendar_today, color: Colors.white,),
           labelStyle: const TextStyle(color: Colors.white),
           labelText: (state.movimiento.fecha == '')
               ? "Elija fecha"

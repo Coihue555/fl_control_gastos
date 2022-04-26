@@ -22,7 +22,8 @@ class BtnGuardarMovWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
+        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+        backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.3)),
       ),
       child: const SizedBox(
         width: double.infinity,
@@ -41,6 +42,7 @@ class BtnGuardarMovWidget extends StatelessWidget {
         context
           .read<MovimientosBloc>()
           .add(ValidateMovimiento(dropdownCategoria, dropdownCuenta, dateinput.text, spDescripcion, spValor));
+
       }
     );
   }

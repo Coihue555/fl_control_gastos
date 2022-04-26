@@ -17,7 +17,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
   }
   Future<void> _guardarMovimiento(GuardarMovimiento event, Emitter emit) async {
     emit(state.copyWith( isWorking: true, error: '', accion: 'GuardarMovimiento', ));
-    await Future.delayed(Duration(seconds: 4));
+    
     //Guardar nuevo o Modificacion
    final idMovimiento =( state.movimiento.id == null)
       ?  await DBProvider.db.nuevoDato(state.movimiento)
@@ -70,20 +70,25 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
     emit(state.copyWith(isWorking: true, accion: 'ValidateMovimiento', error: ''));
     String error = '';
     final MovimientosModel modelo = state.movimiento;
-    if (event.categoria.isEmpty) {
-      error = 'Debe ingresar una categoria';
-    }
+
+    if (event.descripcion == ''){ error = 'Debe ingresar una Descripcion'; }
+    if (event.valor == 0.0)     { error = 'Debe ingresar un Valor'; }
+    if (event.fecha == '')      { error = 'Debe ingresar una Fecha'; }
+    if (event.cuenta == '')     { error = 'Debe ingresar una Cuenta'; }
+    if (event.categoria == '')  { error = 'Debe ingresar una Categoria'; }
+
+
     if (error.isEmpty) {
-      if (event.categoria.length < 3) {
-        error = 'El nombre debe ser mas largo';
-      } else {
+     
         modelo.categoria = event.categoria;
-      }
+        modelo.descripcion = event.descripcion;
+        modelo.cuenta = event.cuenta;
+        modelo.fecha = event.fecha;
+        modelo.valor = event.valor;
+      
     }
-    modelo.descripcion = event.descripcion;
-    modelo.cuenta = event.cuenta;
-    modelo.fecha = event.fecha;
-    modelo.valor = event.valor;
+
+    
 
     emit(state.copyWith(
       isWorking: false,

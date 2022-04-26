@@ -21,11 +21,19 @@ class MovBodyWidget extends StatelessWidget {
         }
         if (state.accion == 'GuardarMovimiento' && state.error.isEmpty) {
           Navigator.pop(context);
-          log('ewrwefes');
         }
         if (state.error.isNotEmpty) {
-          print(state.error);
-        }
+            final snackBar = SnackBar(
+            duration: const Duration(milliseconds: 500),
+            content: Text(state.error),
+            backgroundColor: Colors.red,
+            action: SnackBarAction(            
+                label: 'Ok',
+                onPressed: () {},
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         if (state.accion == 'ValidateMovimiento' && state.error.isEmpty) {
           context.read<MovimientosBloc>().add(GuardarMovimiento());
         }
