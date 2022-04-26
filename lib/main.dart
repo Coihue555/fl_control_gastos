@@ -6,7 +6,7 @@ import 'package:fl_control_gastos/widgets/widgets.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
 
 void main() => BlocOverrides.runZoned(() async {
-      runApp(MyApp());
+      runApp(const MyApp());
     }, blocObserver: SimpleBlocObserver());
 
 class MyApp extends StatelessWidget {
@@ -19,11 +19,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MovimientosBloc()),
         BlocProvider(create: (_) => CuentasBloc()),
         BlocProvider(create: (_) => CategoriasBloc()),
+        BlocProvider(create: (_) => NavBloc()),
       ],
       child: Builder(builder: (context) {
         context.read<MovimientosBloc>().add(GetMovimientosList());
         context.read<CuentasBloc>().add(GetCuentasList());
         context.read<CategoriasBloc>().add(GetCategoriaList());
+        context.read<NavBloc>().add(GetScreen('Home'));
 
         return MaterialApp(
             theme: themePropio(),
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
             initialRoute: 'Home',
             routes: {
               'Home': (_) => const HomeScreen(),
-              'MovimientosFicha': (_) => MovimientosFichaScreen(),
+              'MovimientosFicha': (_) => const MovimientosFichaScreen(),
               'Cuentas': (_) => const CuentasScreen(),
               'CuentasFicha': (_) => CuentaFichaScreen(),
               'Categorias': (_) => const CategoriasScreen(),

@@ -2,9 +2,9 @@ part of 'nav_bloc.dart';
 
 @immutable
  class NavState {
-   final String screen;
+   String screen;
 
-   const NavState({
+   NavState({
      required this.screen
    });
 

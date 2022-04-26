@@ -1,4 +1,9 @@
 part of 'nav_bloc.dart';
 
 @immutable
-class NavEvent {}
+abstract class NavEvent {}
+
+class GetScreen extends NavEvent{
+  String screen;
+  GetScreen(this.screen);
+}

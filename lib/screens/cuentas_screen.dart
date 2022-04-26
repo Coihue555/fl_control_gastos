@@ -13,7 +13,7 @@ class CuentasScreen extends StatelessWidget {
     return Container(
       decoration: gradientePropia(),
       child: Scaffold(
-        drawer: const CustomDrawerWidget(),
+        drawer: CustomDrawerWidget(),
         appBar: const CustomAppBarWidget(title: 'Cuentas',),
         body: CuentasBodyWidget(),
         

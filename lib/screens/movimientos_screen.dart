@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
       decoration: gradientePropia(),
       child: Scaffold(
-        drawer: const CustomDrawerWidget(),
+        drawer: CustomDrawerWidget(),
         appBar: const CustomAppBarWidget( title: 'Movimientos',  ),
         body: const MovBodyWidget(),
 
