@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
@@ -40,12 +39,15 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                   return Form(
                     child: Column(
                       children: [
-                        CampoNombreCatFichaWidget(state),
+                        campoNombreCatFichaWidget(state),
+
                         const SizedBox(height: 10,),
-                        CampoTipoCatFichaWidget(state),
+
+                        campoTipoCatFichaWidget(state),
                         //esGastoWidget(),
                         const SizedBox(height: 10,),
-                        BtnGuardarCatFicha(nombreCategoria: nombreCategoria, tipoCategoria: tipoCategoria)
+
+                        btnGuardarCatFicha(nombreCategoria: nombreCategoria, tipoCategoria: tipoCategoria)
                       ],
                     ),
                   );
@@ -75,7 +77,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
 
 
-  TextFormField CampoNombreCatFichaWidget(CategoriasState state) {
+  Widget campoNombreCatFichaWidget(CategoriasState state) {
     return TextFormField(
       decoration: const InputDecoration(
         labelStyle: TextStyle(color: Colors.white),
@@ -87,12 +89,11 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
         setState(() {
           nombreCategoria;
         });
-        
       },
     );
   }
 
-  TextFormField CampoTipoCatFichaWidget(CategoriasState state) {
+  Widget campoTipoCatFichaWidget(CategoriasState state) {
 
     return TextFormField(
       decoration: const InputDecoration(
@@ -110,34 +111,4 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
     );
   }
   
-}
-
-class BtnGuardarCatFicha extends StatelessWidget {
-  const BtnGuardarCatFicha({
-    Key? key,
-    required this.nombreCategoria,
-    required this.tipoCategoria,
-  }) : super(key: key);
-
-  final String nombreCategoria;
-  final String tipoCategoria;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
-      ),
-      child: const SizedBox(
-        width: double.infinity,
-        child: Center(child: Text('Guardar'))
-      ),
-      onPressed: () {
-                        
-        context
-            .read<CategoriasBloc>()
-            .add(ValidateCategoria(nombreCategoria, tipoCategoria));
-      }
-    );
-  }
 }

@@ -77,13 +77,13 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
                                   ),
                                   const SizedBox(height: 10),
                                   campoDescMovFichaWidget(state),
+
                                   BtnGuardarMovWidget(
-                                      dropdownCategoria:
-                                          dropdownCategoria ?? '',
-                                      dropdownCuenta: dropdownCuenta ?? '',
-                                      dateinput: dateinput ,
-                                      spDescripcion: spDescripcion,
-                                      spValor: spValor)
+                                    dropdownCategoria: dropdownCategoria ?? '',
+                                    dropdownCuenta: dropdownCuenta ?? '',
+                                    dateinput: dateinput ,
+                                    spDescripcion: spDescripcion,
+                                    spValor: spValor)
                                 ],
                               ),
                             );
