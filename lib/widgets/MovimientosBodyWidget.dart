@@ -42,10 +42,18 @@ class MovBodyWidget extends StatelessWidget {
       builder: (context, state) {
         if (state.lista.isNotEmpty) {
           return Container(
-            height: 390,
+            
             child: Column(
               children: [
-                Expanded(child: const BtnSoloGastosWidget()),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Expanded(child: BtnSoloGastosWidget()),
+                    SizedBox(width: 10,),
+                    Expanded(child: BtnSoloGastosWidget()),
+                  ],
+                ),
+                
                 Expanded(child: Listado(lista: state.lista)),
               ],
             ),
