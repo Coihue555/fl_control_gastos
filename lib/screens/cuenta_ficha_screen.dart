@@ -18,14 +18,12 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return BlocListener<CuentasBloc, CuentasState>(
-      listenWhen: (previous, current) => !current.isWorking,
-      listener: (context, state) {
-        if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
-          Navigator.pushNamed(context, 'Cuentas');
-          log('======>Navigator.pushNamed(context, cuentas)');
-        }
-      },
+    return BlocBuilder<CuentasBloc, CuentasState>(
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async {
+            return !state.isWorking;
+          },
       child: Container(
         decoration: gradientePropia(),
         child: Scaffold(
@@ -50,6 +48,8 @@ class _CuentaFichaScreenState extends State<CuentaFichaScreen> {
             )
           ),
       ),
+        );
+      }
     );
   }
 

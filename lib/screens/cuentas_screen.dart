@@ -38,12 +38,25 @@ class CuentasBodyWidget extends StatelessWidget {
     return BlocConsumer<CuentasBloc, CuentasState>(
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
-        if (state.accion == 'NewCuenta' || state.accion == 'UpdateCuenta') {
+        if (state.accion == 'NewCuenta' ||
+            state.accion == 'UpdateCuenta') {
           Navigator.pushNamed(context, 'CuentasFicha');
           log('======>Navigator.pushNamed(context, cuentasFicha)');
         }
+        if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
+          Navigator.pop(context);
+        }
         if (state.error.isNotEmpty) {
-          print(state.error);
+          final snackBar = SnackBar(
+            duration: const Duration(milliseconds: 500),
+            content: Text(state.error),
+            backgroundColor: Colors.red,
+            action: SnackBarAction(            
+                label: 'Ok',
+                onPressed: () {},
+              ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state.accion == 'ValidateCuenta' && state.error.isEmpty) {
           context.read<CuentasBloc>().add(GuardarCuenta());

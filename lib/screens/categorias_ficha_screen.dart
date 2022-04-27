@@ -19,14 +19,13 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
   @override
   Widget build(BuildContext context) {
     
-    return BlocListener<CategoriasBloc, CategoriasState>(
-      listenWhen: (previous, current) => !current.isWorking,
-      listener: (context, state) {
-        if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
-          Navigator.pushNamed(context, 'Categorias');
-          log('======>Navigator.pushNamed(context, Categorias)');
-        }
-      },
+    return BlocBuilder<CategoriasBloc, CategoriasState>(
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async {
+            return !state.isWorking;
+          },
+      
       child: Container(
         decoration: gradientePropia(),
         child: Scaffold(
@@ -57,6 +56,8 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
           )
         ),
       ),
+        );
+      }
     );
   }
 

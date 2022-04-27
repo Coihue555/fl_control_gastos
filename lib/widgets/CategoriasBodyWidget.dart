@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/bloc/blocs.dart';
@@ -16,8 +18,21 @@ class CategoriasBodyWidget extends StatelessWidget {
         if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
           Navigator.pushNamed(context, 'CategoriasFicha');
         }
+        if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
+          Navigator.pushNamed(context, 'Categorias');
+          log('======>Navigator.pushNamed(context, Categorias)');
+        }
         if (state.error.isNotEmpty) {
-          print(state.error);
+          final snackBar = SnackBar(
+            duration: const Duration(milliseconds: 500),
+            content: Text(state.error),
+            backgroundColor: Colors.red,
+            action: SnackBarAction(            
+                label: 'Ok',
+                onPressed: () {},
+              ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state.accion == 'ValidateCategoria' && state.error.isEmpty) {
           context.read<CategoriasBloc>().add(GuardarCategoria());

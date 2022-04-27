@@ -45,7 +45,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                 onTap: () {
                   if (state.screen != 'Home') {
                     setState(() {
-                    context.read<NavBloc>().add(GetScreen('Home'));
+                      context.read<NavBloc>().add(GetScreen('Home'));
                     });        
                     Navigator.pushReplacementNamed(context, 'Home');
                   } else {
@@ -65,7 +65,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                 onTap: () {
                   if (state.screen != 'Cuentas') {
                     setState(() {
-                    context.read<NavBloc>().add(GetScreen('Cuentas'));
+                      context.read<NavBloc>().add(GetScreen('Cuentas'));
                     });        
                     Navigator.pushReplacementNamed(context, 'Cuentas');
                   } else {
@@ -84,7 +84,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                 onTap: () {
                   if (state.screen != 'Categorias') {
                     setState(() {
-                    context.read<NavBloc>().add(GetScreen('Categorias'));
+                      context.read<NavBloc>().add(GetScreen('Categorias'));
                     });        
                     Navigator.pushReplacementNamed(context, 'Categorias');
                   } else {
