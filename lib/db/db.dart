@@ -149,19 +149,18 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
   }
 
-  // Future bool isExpense(MovimientosModel nuevoDato) async {
-  //   final categoria = nuevoDato.categoria;
+  Future isGasto(MovimientosModel nuevoDato) async {
+ 
+    final db = await database;
+    final res = await db!.rawQuery('''
+      SELECT *
+      FROM transacciones T
+      INNER JOIN categorias C 
+      ON C.nombreCategoria = T.categoria AND C.esGasto = 1
+    ''');
 
-  //   final db = await database;
-  //   final res = await db!.rawQuery('''
-  //     SELECT C.tipoCategoria
-  //     FROM categorias C
-  //     INNER JOIN transacciones T 
-  //     ON C.nombreCategoria = T.categoria AND C.tipoCategoria ='$categoria'
-  //   ''');
-
-  //   return res;
-  // }
+    return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];
+  }
 
   Future<CuentaModel> getCuentaById(int id) async {
     final db = await database;

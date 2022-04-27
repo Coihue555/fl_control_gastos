@@ -15,6 +15,14 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
   int esGasto = 1;
 
   @override
+  void initState() {
+    
+    super.initState();
+    esGasto = context.read<CategoriasBloc>().state.categoria.esGasto;
+     
+  }
+
+  @override
   Widget build(BuildContext context) {
     
     return BlocBuilder<CategoriasBloc, CategoriasState>(
@@ -39,17 +47,8 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                         Row(
                           children: [
                             campoNombreCatFichaWidget(state),
-                            Switch(
-                              value: (state.categoria.esGasto == 1) ? true : false,
-                              activeColor: Colors.deepPurple,
-                              onChanged: (value){
-                                esGasto = (value) ? 1 : 0;
-                                setState(() {
-                                  esGasto;
-                                });
-                                print(esGasto);
-                              }
-                            )
+                            const SizedBox(width: 15,),
+                            esGastoWidget()
                           ],
                         ),
                         //campoTipoCatFichaWidget(state),
@@ -68,6 +67,30 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
       }
     );
   }
+
+  Widget esGastoWidget() {
+    return Container(
+      width: 70,
+      child: Column(
+        children: [
+          Switch(
+            value: (esGasto == 1) ? true : false,
+            activeColor: Colors.deepPurple,
+            onChanged: (value){
+              esGasto = (value) ? 1 : 0;
+              setState(() {    
+              });
+            }
+          ),
+          (esGasto == 1)
+          ? const Text('Es Gasto')
+          : const Text('Es Ingreso')
+        ],
+      ),
+    );
+  }
+
+
 
 
 
