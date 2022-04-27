@@ -41,7 +41,15 @@ class MovBodyWidget extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.lista.isNotEmpty) {
-          return Listado(lista: state.lista);
+          return Container(
+            height: 390,
+            child: Column(
+              children: [
+                Expanded(child: const BtnSoloGastosWidget()),
+                Expanded(child: Listado(lista: state.lista)),
+              ],
+            ),
+          );
         } else {
           return const Center(
             child: Text('Aun no hay Movimientos cargados'),
