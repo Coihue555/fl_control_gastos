@@ -2,7 +2,7 @@
 class CategoriaModel {
   int? id;
   String nombreCategoria;
-  bool esGasto;
+  int esGasto;
 
   CategoriaModel({
     this.id,
@@ -13,7 +13,7 @@ class CategoriaModel {
   CategoriaModel copyWith({
     int? id,
     String nombreCategoria = '',
-    bool esGasto = true,
+    int esGasto = 1,
   }) =>
       CategoriaModel(
           id: id ?? this.id,

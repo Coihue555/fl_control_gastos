@@ -12,7 +12,7 @@ class CategoriasFichaScreen extends StatefulWidget {
 class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
   String nombreCategoria = '';
-  bool esGasto = true;
+  int esGasto = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +36,24 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                   return Form(
                     child: Column(
                       children: [
-                        campoNombreCatFichaWidget(state),
-
-                        const SizedBox(height: 10,),
-
+                        Row(
+                          children: [
+                            campoNombreCatFichaWidget(state),
+                            Switch(
+                              value: (state.categoria.esGasto == 1) ? true : false,
+                              activeColor: Colors.deepPurple,
+                              onChanged: (value){
+                                esGasto = (value) ? 1 : 0;
+                                setState(() {
+                                  esGasto;
+                                });
+                                print(esGasto);
+                              }
+                            )
+                          ],
+                        ),
                         //campoTipoCatFichaWidget(state),
-                        esGastoWidget(),
                         const SizedBox(height: 10,),
-
                         btnGuardarCatFicha(nombreCategoria: nombreCategoria, esGasto: esGasto)
                       ],
                     ),
@@ -59,55 +69,24 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
     );
   }
 
-  Switch esGastoWidget() {
-    return Switch(
-      value: esGasto,
-      activeColor: Colors.deepPurple,
-      onChanged: (value){
-        esGasto = value;
-        setState(() {
-          esGasto;
-        });
-        print(esGasto);
-      }
-    );
-  }
-
-
 
 
   Widget campoNombreCatFichaWidget(CategoriasState state) {
-    return TextFormField(
-      decoration: const InputDecoration(
-        labelStyle: TextStyle(color: Colors.white),
-        labelText: 'Nombre de la categoria',
+    return Expanded(
+      child: TextFormField(
+        decoration: const InputDecoration(
+          labelStyle: TextStyle(color: Colors.white),
+          labelText: 'Nombre de la categoria',
+        ),
+        initialValue: state.categoria.nombreCategoria,
+        onChanged: (value) {
+          nombreCategoria = value;
+          setState(() {
+            nombreCategoria;
+          });
+        },
       ),
-      initialValue: state.categoria.nombreCategoria,
-      onChanged: (value) {
-        nombreCategoria = value;
-        setState(() {
-          nombreCategoria;
-        });
-      },
     );
   }
-
-  // Widget campoTipoCatFichaWidget(CategoriasState state) {
-
-  //   return TextFormField(
-  //     decoration: const InputDecoration(
-  //       labelStyle: TextStyle(color: Colors.white),
-  //       labelText: 'Tipo de categoria',
-  //     ),
-  //     initialValue: (state.categoria.esGasto) ? 'Gasto' : 'Ingreso',
-  //     onChanged: (value) {
-  //       esGasto = value;
-  //       setState(() {
-  //         esGasto;
-  //       });
-        
-  //     },
-  //   );
-  // }
   
 }

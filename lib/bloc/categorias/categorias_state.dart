@@ -15,7 +15,7 @@ class CategoriasState {
       this.error = '',
       this.accion = ''})
       : lista = lista ?? [],
-        categoria = categoria ?? CategoriaModel(nombreCategoria: '', esGasto: true);
+        categoria = categoria ?? CategoriaModel(nombreCategoria: '', esGasto: 1);
 
   CategoriasState copyWith({
     final bool? isWorking,

@@ -10,7 +10,7 @@ class btnGuardarCatFicha extends StatelessWidget {
   }) : super(key: key);
 
   String nombreCategoria;
-  bool esGasto;
+  int esGasto;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class btnGuardarCatFicha extends StatelessWidget {
       onPressed: () {
         final catState = BlocProvider.of<CategoriasBloc>(context).state.categoria;
         if(nombreCategoria.isEmpty) {nombreCategoria = catState.nombreCategoria;}
-        if(esGasto) {esGasto = (catState.esGasto);}
+        //TODO valores
+        //if(esGasto) {esGasto = (catState.esGasto);}
                         
         context
             .read<CategoriasBloc>()

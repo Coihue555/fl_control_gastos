@@ -65,7 +65,7 @@ class DBProvider {
 
         await db.execute(
           '''
-          INSERT INTO categorias (nombreCategoria, esGasto) VALUES ('Comida', true)
+          INSERT INTO categorias (nombreCategoria, esGasto) VALUES ('Comida', 1)
           '''
         );
     });
@@ -204,7 +204,7 @@ class DBProvider {
     final db = await database;
     final res = await db!.query('categorias', where: 'id = ?', whereArgs: [id]);
 
-    return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', esGasto: true);
+    return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', esGasto: 1);
   }
 
   Future<int> updateCategoria(CategoriaModel nuevaCategoria) async {
