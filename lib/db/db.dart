@@ -53,7 +53,7 @@ class DBProvider {
           CREATE TABLE categorias(
             id INTEGER PRIMARY KEY,
             nombreCategoria TEXT,
-            tipoCategoria TEXT
+            esGasto INTEGER
           )
         ''');
 
@@ -65,7 +65,7 @@ class DBProvider {
 
         await db.execute(
           '''
-          INSERT INTO categorias (nombreCategoria, tipoCategoria) VALUES ('Comida', 'Gasto')
+          INSERT INTO categorias (nombreCategoria, esGasto) VALUES ('Comida', true)
           '''
         );
     });
@@ -204,7 +204,7 @@ class DBProvider {
     final db = await database;
     final res = await db!.query('categorias', where: 'id = ?', whereArgs: [id]);
 
-    return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', tipoCategoria: '');
+    return res.isNotEmpty ? CategoriaModel.fromJson(res.first) : CategoriaModel(nombreCategoria: '', esGasto: true);
   }
 
   Future<int> updateCategoria(CategoriaModel nuevaCategoria) async {

@@ -76,7 +76,7 @@ class ListadoCategorias extends StatelessWidget {
         },
         child: ListTile(
           title: Text(lista[i].nombreCategoria),
-          subtitle: Text(lista[i].tipoCategoria,),
+          subtitle: (lista[i].esGasto) ? const Text('Gasto') : const Text('Ingreso'),
           trailing: Container(
             width: 150,
             child: Row(

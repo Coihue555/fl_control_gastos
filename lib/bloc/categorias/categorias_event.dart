@@ -24,9 +24,9 @@ class GuardarCategoria extends CategoriasEvent{
 
 class ValidateCategoria extends CategoriasEvent{
   final String nombreCategoria;
-  final String tipoCategoria;
+  final bool esGasto;
   
-  ValidateCategoria(this.nombreCategoria, this.tipoCategoria);
+  ValidateCategoria(this.nombreCategoria, this.esGasto);
 }
 
 class DeleteCategoria extends CategoriasEvent{

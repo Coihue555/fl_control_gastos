@@ -1,31 +1,33 @@
+import 'dart:ffi';
+
 class CategoriaModel {
   int? id;
   String nombreCategoria;
-  String tipoCategoria;
+  bool esGasto;
 
   CategoriaModel({
     this.id,
     required this.nombreCategoria,
-    required this.tipoCategoria
+    required this.esGasto
     });
 
   CategoriaModel copyWith({
     int? id,
     String nombreCategoria = '',
-    String tipoCategoria = '',
+    bool esGasto = true,
   }) =>
       CategoriaModel(
           id: id ?? this.id,
           nombreCategoria: nombreCategoria,
-          tipoCategoria: tipoCategoria,
+          esGasto: esGasto,
           );
 
   factory CategoriaModel.fromJson(Map<String, dynamic> json) => CategoriaModel(
         id: json["id"],
         nombreCategoria: json["nombreCategoria"],
-        tipoCategoria: json["tipoCategoria"],
+        esGasto: json["esGasto"],
       );
 
   Map<String, dynamic> toJson() =>
-      {"id": id, "nombreCategoria": nombreCategoria, "tipoCategoria": tipoCategoria};
+      {"id": id, "nombreCategoria": nombreCategoria, "esGasto": esGasto};
 }

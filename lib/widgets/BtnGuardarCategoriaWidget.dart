@@ -6,11 +6,11 @@ class btnGuardarCatFicha extends StatelessWidget {
   btnGuardarCatFicha({
     Key? key,
     required this.nombreCategoria,
-    required this.tipoCategoria,
+    required this.esGasto,
   }) : super(key: key);
 
   String nombreCategoria;
-  String tipoCategoria;
+  bool esGasto;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class btnGuardarCatFicha extends StatelessWidget {
       onPressed: () {
         final catState = BlocProvider.of<CategoriasBloc>(context).state.categoria;
         if(nombreCategoria.isEmpty) {nombreCategoria = catState.nombreCategoria;}
-        if(tipoCategoria.isEmpty) {tipoCategoria = catState.tipoCategoria;}
+        if(esGasto) {esGasto = (catState.esGasto);}
                         
         context
             .read<CategoriasBloc>()
-            .add(ValidateCategoria(nombreCategoria, tipoCategoria));
+            .add(ValidateCategoria(nombreCategoria, esGasto));
       }
     );
   }

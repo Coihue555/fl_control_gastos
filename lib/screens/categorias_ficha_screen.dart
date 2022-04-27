@@ -13,7 +13,6 @@ class CategoriasFichaScreen extends StatefulWidget {
 class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
   String nombreCategoria = '';
-  String tipoCategoria = '';
   bool esGasto = true;
 
   @override
@@ -46,7 +45,7 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
                         //esGastoWidget(),
                         const SizedBox(height: 10,),
 
-                        btnGuardarCatFicha(nombreCategoria: nombreCategoria, tipoCategoria: tipoCategoria)
+                        btnGuardarCatFicha(nombreCategoria: nombreCategoria, esGasto: esGasto)
                       ],
                     ),
                   );
@@ -101,11 +100,11 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
         labelStyle: TextStyle(color: Colors.white),
         labelText: 'Tipo de categoria',
       ),
-      initialValue: state.categoria.tipoCategoria,
+      initialValue: (state.categoria.esGasto) ? 'Gasto' : 'Ingreso',
       onChanged: (value) {
-        tipoCategoria = value;
+        esGasto = value;
         setState(() {
-          tipoCategoria;
+          esGasto;
         });
         
       },
