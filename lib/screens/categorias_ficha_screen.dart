@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_control_gastos/widgets/widgets.dart';
@@ -41,8 +40,8 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
 
                         const SizedBox(height: 10,),
 
-                        campoTipoCatFichaWidget(state),
-                        //esGastoWidget(),
+                        //campoTipoCatFichaWidget(state),
+                        esGastoWidget(),
                         const SizedBox(height: 10,),
 
                         btnGuardarCatFicha(nombreCategoria: nombreCategoria, esGasto: esGasto)
@@ -93,22 +92,22 @@ class _CategoriasFichaScreenState extends State<CategoriasFichaScreen> {
     );
   }
 
-  Widget campoTipoCatFichaWidget(CategoriasState state) {
+  // Widget campoTipoCatFichaWidget(CategoriasState state) {
 
-    return TextFormField(
-      decoration: const InputDecoration(
-        labelStyle: TextStyle(color: Colors.white),
-        labelText: 'Tipo de categoria',
-      ),
-      initialValue: (state.categoria.esGasto) ? 'Gasto' : 'Ingreso',
-      onChanged: (value) {
-        esGasto = value;
-        setState(() {
-          esGasto;
-        });
+  //   return TextFormField(
+  //     decoration: const InputDecoration(
+  //       labelStyle: TextStyle(color: Colors.white),
+  //       labelText: 'Tipo de categoria',
+  //     ),
+  //     initialValue: (state.categoria.esGasto) ? 'Gasto' : 'Ingreso',
+  //     onChanged: (value) {
+  //       esGasto = value;
+  //       setState(() {
+  //         esGasto;
+  //       });
         
-      },
-    );
-  }
+  //     },
+  //   );
+  // }
   
 }

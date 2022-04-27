@@ -42,7 +42,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
       accion: 'GetCategoriasList',
       lista: [],
       error: '',
-      categoria: CategoriaModel(nombreCategoria: '', tipoCategoria: '', ),
+      categoria: CategoriaModel(nombreCategoria: '', esGasto: true, ),
     ));
     final List<CategoriaModel> lst = await DBProvider.db.getCategorias();
     emit(state.copyWith(
@@ -55,7 +55,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
 
   Future<void> _newCategoria(NewCategoria event, Emitter emit) async {
     emit(state.copyWith(
-        isWorking: false, accion: 'NewCategoria', categoria: CategoriaModel(nombreCategoria: '', tipoCategoria: ''), error: ''));
+        isWorking: false, accion: 'NewCategoria', categoria: CategoriaModel(nombreCategoria: '', esGasto: true), error: ''));
   }
 
   Future<void> _updateCategoria(UpdateCategoria event, Emitter emit) async {
@@ -81,7 +81,7 @@ class CategoriasBloc extends Bloc<CategoriasEvent, CategoriasState> {
         categoria.nombreCategoria = event.nombreCategoria;
       }
     }
-    categoria.tipoCategoria = event.tipoCategoria;
+    categoria.esGasto = event.esGasto;
 
     emit(state.copyWith(
       isWorking: false,
