@@ -149,7 +149,7 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
   }
 
-  Future isGasto(MovimientosModel nuevoDato) async {
+  Future isGasto() async {
  
     final db = await database;
     final res = await db!.rawQuery('''

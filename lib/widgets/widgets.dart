@@ -6,3 +6,4 @@ export 'package:fl_control_gastos/widgets/MovimientosBodyWidget.dart';
 export 'package:fl_control_gastos/widgets/CategoriasBodyWidget.dart';
 export 'package:fl_control_gastos/widgets/BtnGuardarMovWidget.dart';
 export 'package:fl_control_gastos/widgets/BtnGuardarCategoriaWidget.dart';
+export 'package:fl_control_gastos/widgets/BtnSoloGastosWidget.dart';

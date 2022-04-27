@@ -16,10 +16,10 @@ class CategoriasBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
         if (state.accion == 'NewCategoria' || state.accion == 'UpdateCategoria') {
-          Navigator.pushReplacementNamed(context, 'CategoriasFicha');
+          Navigator.pushNamed(context, 'CategoriasFicha');
         }
         if (state.accion == 'GuardarCategoria' && state.error.isEmpty) {
-          Navigator.pushReplacementNamed(context, 'Categorias');
+          Navigator.pop(context);
           log('======>Navigator.pushNamed(context, Categorias)');
         }
         if (state.error.isNotEmpty) {

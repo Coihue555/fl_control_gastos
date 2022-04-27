@@ -13,6 +13,10 @@ class NewMovimiento extends MovimientosEvent{
 NewMovimiento();
 }
 
+class SoloGastos extends MovimientosEvent{
+SoloGastos();
+}
+
 class UpdateMovimiento extends MovimientosEvent{
   final int id;
   UpdateMovimiento(this.id);

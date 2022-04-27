@@ -14,6 +14,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
     on<UpdateMovimiento>(_updateMovimiento);
     on<ValidateMovimiento>(_validateMovimiento);
     on<DeleteMovimiento>(_deleteMovimiento);
+    on<SoloGastos>(_soloGastos);
   }
   Future<void> _guardarMovimiento(GuardarMovimiento event, Emitter emit) async {
     emit(state.copyWith( isWorking: true, error: '', accion: 'GuardarMovimiento', ));
@@ -47,6 +48,23 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
     emit(state.copyWith(
       lista: lst,
       accion: 'GetMovimientosList',
+      error: '',
+      isWorking: false,
+    ));
+  }
+
+    Future<void> _soloGastos(SoloGastos event, Emitter emit) async {
+    emit(state.copyWith(
+      isWorking: true,
+      accion: 'SoloGastos',
+      lista: [],
+      error: '',
+      movimiento: MovimientosModel(categoria: '', cuenta: '', fecha: ''),
+    ));
+    final List<MovimientosModel> lst = await DBProvider.db.isGasto();
+    emit(state.copyWith(
+      lista: lst,
+      accion: 'SoloGastos',
       error: '',
       isWorking: false,
     ));

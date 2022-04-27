@@ -40,7 +40,7 @@ class CuentasBodyWidget extends StatelessWidget {
       listener: (context, state) {
         if (state.accion == 'NewCuenta' ||
             state.accion == 'UpdateCuenta') {
-          Navigator.pushReplacementNamed(context, 'CuentasFicha');
+          Navigator.pushNamed(context, 'CuentasFicha');
           log('======>Navigator.pushNamed(context, cuentasFicha)');
         }
         if (state.accion == 'GuardarCuenta' && state.error.isEmpty) {
