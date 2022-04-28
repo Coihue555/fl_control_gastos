@@ -109,7 +109,7 @@ class DBProvider {
 
   Future<List<MovimientosModel>> getTodos() async {
     final db = await database;
-    final res = await db!.query('transacciones', orderBy: 'id DESC');
+    final res = await db!.query('transacciones', orderBy: 'fecha DESC');
 
     return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];
   }
