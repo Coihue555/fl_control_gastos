@@ -49,8 +49,8 @@ class MovBodyWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(child: BtnTipoCuentasWidget(tipo:1)),
-                    const SizedBox(width: 10,),
                     Expanded(child: BtnTipoCuentasWidget(tipo:0)),
+                    BtnRefreshMovWidget()
                   ],
                 ),
                 
