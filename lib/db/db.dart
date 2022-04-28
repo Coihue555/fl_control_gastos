@@ -159,7 +159,7 @@ class DBProvider {
       ON C.nombreCategoria = T.categoria AND C.esGasto = $tipo
     ''');
 
-    return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];
+    return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : <MovimientosModel> [];
   }
 
 

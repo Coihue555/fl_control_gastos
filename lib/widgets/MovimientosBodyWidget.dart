@@ -39,29 +39,24 @@ class MovBodyWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state.lista.isNotEmpty) {
-          return Container(
-            
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(child: BtnTipoCuentasWidget(tipo:1)),
-                    Expanded(child: BtnTipoCuentasWidget(tipo:0)),
-                    BtnRefreshMovWidget()
-                  ],
-                ),
-                
-                Expanded(child: Listado(lista: state.lista)),
-              ],
-            ),
+        return Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: BtnTipoCuentasWidget(tipo:1)),
+                  Expanded(child: BtnTipoCuentasWidget(tipo:0)),
+                  BtnRefreshMovWidget()
+                ],
+              ),
+              (state.lista.isNotEmpty)
+              ? Expanded(child: Listado(lista: state.lista))
+              : const Center(
+                heightFactor: 30,
+                  child: Text('Aun no hay Movimientos cargados'),
+                )
+            ],
           );
-        } else {
-          return const Center(
-            child: Text('Aun no hay Movimientos cargados'),
-          );
-        }
       },
     );
   }
