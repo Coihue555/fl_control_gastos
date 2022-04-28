@@ -149,14 +149,14 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => CuentaModel.fromJson(s)).toList() : [];
   }
 
-  Future isGasto() async {
+  Future isGasto(int tipo) async {
  
     final db = await database;
     final res = await db!.rawQuery('''
       SELECT *
       FROM transacciones T
       INNER JOIN categorias C 
-      ON C.nombreCategoria = T.categoria AND C.esGasto = 1
+      ON C.nombreCategoria = T.categoria AND C.esGasto = $tipo
     ''');
 
     return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];

@@ -14,7 +14,8 @@ NewMovimiento();
 }
 
 class SoloGastos extends MovimientosEvent{
-SoloGastos();
+  final int tipo;
+SoloGastos(this.tipo);
 }
 
 class UpdateMovimiento extends MovimientosEvent{

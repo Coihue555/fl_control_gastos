@@ -47,10 +47,10 @@ class MovBodyWidget extends StatelessWidget {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Expanded(child: BtnSoloGastosWidget()),
-                    SizedBox(width: 10,),
-                    Expanded(child: BtnSoloGastosWidget()),
+                  children: [
+                    Expanded(child: BtnTipoCuentasWidget(tipo:1)),
+                    const SizedBox(width: 10,),
+                    Expanded(child: BtnTipoCuentasWidget(tipo:0)),
                   ],
                 ),
                 

@@ -61,7 +61,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
       error: '',
       movimiento: MovimientosModel(categoria: '', cuenta: '', fecha: ''),
     ));
-    final List<MovimientosModel> lst = await DBProvider.db.isGasto();
+    final List<MovimientosModel> lst = await DBProvider.db.isGasto(event.tipo);
     emit(state.copyWith(
       lista: lst,
       accion: 'SoloGastos',
