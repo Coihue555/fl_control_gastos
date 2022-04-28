@@ -53,7 +53,7 @@ class MovimientosBloc extends Bloc<MovimientosEvent, MovimientosState> {
     ));
   }
 
-    Future<void> _soloGastos(SoloGastos event, Emitter emit) async {
+  Future<void> _soloGastos(SoloGastos event, Emitter emit) async {
     emit(state.copyWith(
       isWorking: true,
       accion: 'SoloGastos',

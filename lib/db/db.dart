@@ -162,6 +162,8 @@ class DBProvider {
     return res.isNotEmpty ? res.map((s) => MovimientosModel.fromJson(s)).toList() : [];
   }
 
+
+
   Future<CuentaModel> getCuentaById(int id) async {
     final db = await database;
     final res = await db!.query('cuentas', where: 'id = ?', whereArgs: [id]);
