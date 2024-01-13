@@ -11,7 +11,7 @@ class CategoriasScreen extends StatelessWidget {
     return Container(
       decoration: gradientePropia(),
       child: Scaffold(
-        drawer: CustomDrawerWidget(),
+        drawer: const CustomDrawerWidget(),
         appBar: const CustomAppBarWidget(title: 'Categorias'),
         body: const CategoriasBodyWidget(),
         floatingActionButton: FloatingActionButton(

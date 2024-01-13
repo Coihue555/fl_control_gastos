@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/blocs.dart';
 
 class CustomDrawerWidget extends StatefulWidget {
-  CustomDrawerWidget({
+  const CustomDrawerWidget({
     Key? key,
   }) : super(key: key);
 

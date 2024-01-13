@@ -14,8 +14,7 @@ class MovBodyWidget extends StatelessWidget {
     return BlocConsumer<MovimientosBloc, MovimientosState>(
       listenWhen: (previous, current) => !current.isWorking,
       listener: (context, state) {
-        if (state.accion == 'NewMovimiento' ||
-            state.accion == 'UpdateMovimiento') {
+        if (state.accion == 'NewMovimiento' || state.accion == 'UpdateMovimiento') {
           Navigator.pushNamed(context, 'MovimientosFicha');
           log('======>Navigator.pushNamed(context, movimientosFicha)');
         }
@@ -23,40 +22,36 @@ class MovBodyWidget extends StatelessWidget {
           Navigator.pop(context);
         }
         if (state.error.isNotEmpty) {
-            final snackBar = SnackBar(
+          final snackBar = SnackBar(
             duration: const Duration(milliseconds: 500),
             content: Text(state.error),
             backgroundColor: Colors.red,
-            action: SnackBarAction(            
-                label: 'Ok',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () {},
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
         if (state.accion == 'ValidateMovimiento' && state.error.isEmpty) {
           context.read<MovimientosBloc>().add(GuardarMovimiento());
         }
       },
       builder: (context, state) {
         return Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(child: BtnTipoCuentasWidget(tipo:1)),
-                  Expanded(child: BtnTipoCuentasWidget(tipo:0)),
-                  BtnRefreshMovWidget()
-                ],
-              ),
-              (state.lista.isNotEmpty)
-              ? Expanded(child: Listado(lista: state.lista))
-              : const Center(
-                heightFactor: 30,
-                  child: Text('Aun no hay Movimientos cargados'),
-                )
-            ],
-          );
+          children: [
+            const Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [Expanded(child: BtnTipoCuentasWidget(tipo: 1)), Expanded(child: BtnTipoCuentasWidget(tipo: 0)), BtnRefreshMovWidget()],
+            ),
+            (state.lista.isNotEmpty)
+                ? Expanded(child: Listado(lista: state.lista))
+                : const Center(
+                    heightFactor: 30,
+                    child: Text('Aun no hay Movimientos cargados'),
+                  )
+          ],
+        );
       },
     );
   }

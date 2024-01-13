@@ -77,11 +77,11 @@ class ListadoCategorias extends StatelessWidget {
         child: ListTile(
           title: Text(lista[i].nombreCategoria),
           subtitle: (lista[i].esGasto == 1) ? const Text('Gasto') : const Text('Ingreso'),
-          trailing: Container(
+          trailing: const SizedBox(
             width: 150,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
+              children: [
                 Icon(Icons.chevron_right, color: Colors.white),
               ],
             ),

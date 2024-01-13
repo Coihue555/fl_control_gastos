@@ -13,9 +13,9 @@ class CuentasScreen extends StatelessWidget {
     return Container(
       decoration: gradientePropia(),
       child: Scaffold(
-        drawer: CustomDrawerWidget(),
+        drawer: const CustomDrawerWidget(),
         appBar: const CustomAppBarWidget(title: 'Cuentas',),
-        body: CuentasBodyWidget(),
+        body: const CuentasBodyWidget(),
         
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
@@ -32,6 +32,8 @@ class CuentasScreen extends StatelessWidget {
 
 
 class CuentasBodyWidget extends StatelessWidget {
+  const CuentasBodyWidget({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

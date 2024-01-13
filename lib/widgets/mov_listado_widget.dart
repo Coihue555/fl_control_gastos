@@ -8,7 +8,7 @@ class Listado extends StatelessWidget {
     Key? key,
     required this.lista,
   }) : super(key: key);
-  
+
   final List<MovimientosModel> lista;
 
   @override
@@ -37,7 +37,7 @@ class Listado extends StatelessWidget {
             contentPadding: const EdgeInsets.only(left: 25, right: 15),
             title: Text(lista[i].categoria + ' - ' + lista[i].descripcion),
             subtitle: Text(lista[i].fecha),
-            trailing: Container(
+            trailing: SizedBox(
               width: 150,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -48,10 +48,7 @@ class Listado extends StatelessWidget {
                     children: [
                       Text(
                         '\$' + lista[i].valor.toString(),
-                        style: TextStyle(
-                            color: Colors.green[300],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                        style: TextStyle(color: Colors.green[300], fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       Text(lista[i].cuenta),
                     ],
@@ -67,9 +64,7 @@ class Listado extends StatelessWidget {
               ),
             ),
             onTap: () {
-              context
-                  .read<MovimientosBloc>()
-                  .add(UpdateMovimiento(lista[i].id!));
+              context.read<MovimientosBloc>().add(UpdateMovimiento(lista[i].id!));
             }),
       ),
     );

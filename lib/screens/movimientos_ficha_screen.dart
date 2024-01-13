@@ -32,68 +32,51 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<MovimientosBloc, MovimientosState>(
       builder: (context, state) {
-        return WillPopScope(
-          onWillPop: () async {
-            return !state.isWorking;
-          },
-          child: Container(
-            decoration: gradientePropia(),
-            child: Scaffold(
-                
-                appBar: const CustomAppBarWidget(
-                  title: 'Nueva transaccion',
-                ),
-                body: SingleChildScrollView(
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: BlocBuilder<MovimientosBloc, MovimientosState>(
-                          builder: (context, state) {
-                            
-                            return Form(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      dropCategoriaMovFichaWidget(),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      dropCuentasMovFicha()
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: campoFechaMovFichaWidget(
-                                              state, context)),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                          child:
-                                              campoValorMovFichaWidget(state)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  campoDescMovFichaWidget(state),
-
-                                  BtnGuardarMovWidget(
+        return Container(
+          decoration: gradientePropia(),
+          child: Scaffold(
+              appBar: const CustomAppBarWidget(
+                title: 'Nueva transaccion',
+              ),
+              body: SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: BlocBuilder<MovimientosBloc, MovimientosState>(
+                        builder: (context, state) {
+                          return Form(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    dropCategoriaMovFichaWidget(),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    dropCuentasMovFicha()
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Expanded(child: campoFechaMovFichaWidget(state, context)),
+                                    const SizedBox(width: 10),
+                                    Expanded(child: campoValorMovFichaWidget(state)),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                campoDescMovFichaWidget(state),
+                                BtnGuardarMovWidget(
                                     dropdownCategoria: dropdownCategoria ?? '',
                                     dropdownCuenta: dropdownCuenta ?? '',
-                                    dateinput: dateinput ,
+                                    dateinput: dateinput,
                                     spDescripcion: spDescripcion,
                                     spValor: spValor)
-                                ],
-                              ),
-                            );
-                          },
-                        )
-                      )
-                    )
-                ),
-          ),
-          
+                              ],
+                            ),
+                          );
+                        },
+                      )))),
         );
       },
     );
@@ -105,30 +88,28 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
         if (state.lista.isNotEmpty) {
           return DropdownButton<String>(
             dropdownColor: const Color.fromARGB(221, 35, 23, 37),
-            icon: const Icon(Icons.arrow_drop_down, color: Colors.white,),
+            icon: const Icon(
+              Icons.arrow_drop_down,
+              color: Colors.white,
+            ),
             elevation: 10,
-            hint: const Text('Categoria', style: TextStyle(color: Colors.white),),
+            hint: const Text(
+              'Categoria',
+              style: TextStyle(color: Colors.white),
+            ),
             style: const TextStyle(
               fontSize: 25,
             ),
-            value: (BlocProvider.of<MovimientosBloc>(context)
-                        .state
-                        .movimiento
-                        .categoria ==
-                    '')
+            value: (BlocProvider.of<MovimientosBloc>(context).state.movimiento.categoria == '')
                 ? dropdownCategoria
-                : BlocProvider.of<MovimientosBloc>(context)
-                    .state
-                    .movimiento
-                    .categoria,
+                : BlocProvider.of<MovimientosBloc>(context).state.movimiento.categoria,
             onChanged: (String? newValue) {
               dropdownCategoria = newValue!;
               setState(() {
                 dropdownCategoria;
               });
             },
-            items: state.lista
-                .map<DropdownMenuItem<String>>((CategoriaModel value) {
+            items: state.lista.map<DropdownMenuItem<String>>((CategoriaModel value) {
               return DropdownMenuItem<String>(
                 value: value.nombreCategoria,
                 child: Text(
@@ -154,20 +135,19 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
     return BlocBuilder<CuentasBloc, CuentasState>(
       builder: (context, state) {
         return DropdownButton<String>(
-          value: (BlocProvider.of<MovimientosBloc>(context)
-                      .state
-                      .movimiento
-                      .cuenta ==
-                  '')
+          value: (BlocProvider.of<MovimientosBloc>(context).state.movimiento.cuenta == '')
               ? dropdownCuenta
-              : BlocProvider.of<MovimientosBloc>(context)
-                  .state
-                  .movimiento
-                  .cuenta,
+              : BlocProvider.of<MovimientosBloc>(context).state.movimiento.cuenta,
           dropdownColor: const Color.fromARGB(221, 35, 23, 37),
-          icon: const Icon(Icons.arrow_drop_down, color: Colors.white,),
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: Colors.white,
+          ),
           elevation: 10,
-          hint: const Text('Cuenta', style: TextStyle(color: Colors.white),),
+          hint: const Text(
+            'Cuenta',
+            style: TextStyle(color: Colors.white),
+          ),
           style: const TextStyle(
             fontSize: 25,
           ),
@@ -195,18 +175,17 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
       ),
       controller: dateinput,
       decoration: InputDecoration(
-          icon: const Icon(Icons.calendar_today, color: Colors.white,),
+          icon: const Icon(
+            Icons.calendar_today,
+            color: Colors.white,
+          ),
           labelStyle: const TextStyle(color: Colors.white),
-          labelText: (state.movimiento.fecha == '')
-              ? "Elija fecha"
-              : state.movimiento.fecha),
+          labelText: (state.movimiento.fecha == '') ? "Elija fecha" : state.movimiento.fecha),
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
             context: context,
-            initialDate: (state.movimiento.fecha == '')
-                ? DateTime.now()
-                : DateTime.parse(state.movimiento.fecha),
+            initialDate: (state.movimiento.fecha == '') ? DateTime.now() : DateTime.parse(state.movimiento.fecha),
             firstDate: DateTime(2020),
             lastDate: DateTime(2030));
         if (pickedDate != null) {
@@ -232,9 +211,7 @@ class _MovimientosFichaScreenState extends State<MovimientosFichaScreen> {
       ),
       initialValue: state.movimiento.valor.toString(),
       keyboardType: TextInputType.number,
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
-      ],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))],
       onChanged: (value) {
         spValor = double.tryParse(value) ?? 0;
         setState(() {
